@@ -1,6 +1,7 @@
 package se.ticketbooker.www;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -82,6 +83,16 @@ public class DBHandler {
 			} catch (SQLException e) {
 				System.err.println("Error: Could not close Connection " + e.getMessage());
 			}
+		}
+	}
+	
+	public void search(String input){
+		try {
+			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
+					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
