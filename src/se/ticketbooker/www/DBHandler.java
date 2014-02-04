@@ -8,14 +8,15 @@ import java.sql.Statement;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-public class DBHandler {
+public class DBHandler extends Subject{
 	//Instance variable declaration
 	private MysqlDataSource ds;
 	private Connection connection;
 	private Statement statement;
 	private ResultSet result;
 
-	public void connect(String username, String password){
+	public void connect(String username, String password)
+	{
 		ds = new MysqlDataSource();
 		ds.setServerName("localhost");
 		ds.setPort(3306);
@@ -90,6 +91,7 @@ public class DBHandler {
 		try {
 			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
 					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+			notifyObservers();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

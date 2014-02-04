@@ -17,36 +17,22 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import se.ticketbooker.www.DBHandler;
+import se.ticketbooker.www.Observer;
 
-public class GUI_Test extends JFrame {
 
-
+public class GUI_Test extends JFrame implements Observer
+{
+	
+	
 	private JPanel contentPane;
 	private JTextField searchTextField;
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_Test frame = new GUI_Test();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public GUI_Test() 
+	public GUI_Test(DBHandler dbh)
 	{
+		dbh.addObserver(this);
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
 		setResizable(false);
@@ -158,5 +144,11 @@ public class GUI_Test extends JFrame {
 		JPanel eventContents = new JPanel();
 		eventContents.setBackground(Color.WHITE);
 		body.add(eventContents, BorderLayout.CENTER);
+	}
+
+	@Override
+	public void update() 
+	{
+		// DO STUFF
 	}
 }
