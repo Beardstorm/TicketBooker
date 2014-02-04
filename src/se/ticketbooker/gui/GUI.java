@@ -1,3 +1,4 @@
+package se.ticketbooker.gui;
 
 
 import java.awt.BorderLayout;
