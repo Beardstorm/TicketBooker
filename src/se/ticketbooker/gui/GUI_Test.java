@@ -66,7 +66,7 @@ public class GUI_Test extends JFrame {
 		header.add(logo, BorderLayout.NORTH);
 		logo.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel(new ImageIcon("C:\\Dropbox\\Workspace\\Test\\ticnet.png"));
+		JLabel lblNewLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
 		logo.add(lblNewLabel);
 		
 		JPanel buttons = new JPanel();
