@@ -86,7 +86,7 @@ public class GUI_Test extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e){
 				
-				if(searchTextField.getText() == ""){
+				if(searchTextField.getText().isEmpty()){
 					searchTextField.setText("Search");
 				}
 			}
@@ -106,7 +106,13 @@ public class GUI_Test extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e)
 			{
-				usernameTextField.setText("");
+					usernameTextField.setText("");
+			}
+			public void focusLost(FocusEvent e){
+				
+				if(usernameTextField.getText().isEmpty()){
+					usernameTextField.setText("Username");
+				}
 			}
 		});
 		
@@ -119,6 +125,12 @@ public class GUI_Test extends JFrame {
 			public void focusGained(FocusEvent e)
 			{
 				passwordTextField.setText("");
+			}
+			public void focusLost(FocusEvent e){
+				
+				if(passwordTextField.getText().isEmpty()){
+					passwordTextField.setText("Password");
+				}
 			}
 		});
 		
