@@ -77,11 +77,13 @@ public class GUI_Test extends JFrame {
 		buttons.add(searchTextField);
 		searchTextField.setText("Search");
 		searchTextField.setColumns(10);
-		searchTextField.addFocusListener(new MyFocusListener(){
+		searchTextField.addFocusListener(new FocusListener(){
 			@Override
 			public void focusGained(FocusEvent e)
 			{
-				searchTextField.setText("");
+				if(searchTextField.getText().equals("Search")){
+					searchTextField.setText("");
+				}
 			}
 			@Override
 			public void focusLost(FocusEvent e){
@@ -102,10 +104,11 @@ public class GUI_Test extends JFrame {
 		buttons.add(usernameTextField);
 		usernameTextField.setText("Username");
 		usernameTextField.setColumns(10);
-		usernameTextField.addFocusListener(new MyFocusListener(){
+		usernameTextField.addFocusListener(new FocusListener(){
 			@Override
 			public void focusGained(FocusEvent e)
 			{
+				if(usernameTextField.getText().equals("Username"))
 					usernameTextField.setText("");
 			}
 			public void focusLost(FocusEvent e){
@@ -120,11 +123,12 @@ public class GUI_Test extends JFrame {
 		buttons.add(passwordTextField);
 		passwordTextField.setText("Password");
 		passwordTextField.setColumns(10);
-		passwordTextField.addFocusListener(new MyFocusListener(){
+		passwordTextField.addFocusListener(new FocusListener(){
 			@Override
 			public void focusGained(FocusEvent e)
 			{
-				passwordTextField.setText("");
+				if(passwordTextField.getText().equals("Password"))
+					passwordTextField.setText("");
 			}
 			public void focusLost(FocusEvent e){
 				
@@ -154,21 +158,5 @@ public class GUI_Test extends JFrame {
 		JPanel eventContents = new JPanel();
 		eventContents.setBackground(Color.WHITE);
 		body.add(eventContents, BorderLayout.CENTER);
-	}
-
-	
-	private class MyFocusListener implements FocusListener{
-		@Override
-		public void focusLost(FocusEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void focusGained(FocusEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 	}
 }
