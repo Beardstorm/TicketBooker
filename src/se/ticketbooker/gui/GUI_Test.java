@@ -75,13 +75,20 @@ public class GUI_Test extends JFrame {
 		
 		searchTextField = new JTextField();
 		buttons.add(searchTextField);
-		searchTextField.setText("Search text");
+		searchTextField.setText("Search");
 		searchTextField.setColumns(10);
 		searchTextField.addFocusListener(new MyFocusListener(){
 			@Override
 			public void focusGained(FocusEvent e)
 			{
 				searchTextField.setText("");
+			}
+			@Override
+			public void focusLost(FocusEvent e){
+				
+				if(searchTextField.getText() == ""){
+					searchTextField.setText("Search");
+				}
 			}
 		});
 		
