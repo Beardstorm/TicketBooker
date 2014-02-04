@@ -80,8 +80,17 @@ public class GUI_Test extends JFrame implements Observer
 			}
 		});
 		
-		JButton btnNewButton = new JButton("Search");
-		buttons.add(btnNewButton);
+		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+			
+		});
+		buttons.add(searchButton);
 		
 		JPanel empty_panel_1 = new JPanel();
 		buttons.add(empty_panel_1);
@@ -129,7 +138,7 @@ public class GUI_Test extends JFrame implements Observer
 		
 		JButton btnNewButton_2 = new JButton("Register");
 		buttons.add(btnNewButton_2);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
