@@ -27,12 +27,13 @@ public class MainController {
 			switch(action){
 			case "search":
 				System.out.println("search");
-				db.connect("guest@localhost.com", "guest");
+				db.search("Stockholm");
 				//do stuff
-				db.closeConnection();
+				db.disconnect();
 				break;
 			case "login":
-				db.connect(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+				
 				break;
 			case "register":
 				System.out.println("register");

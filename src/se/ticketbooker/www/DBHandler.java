@@ -14,7 +14,7 @@ public class DBHandler{
 	private Statement statement;
 	private ResultSet result;
 
-	public void connect(String username, String password)
+	public void connect()
 	{
 		ds = new MysqlDataSource();
 		ds.setServerName("localhost");
@@ -25,44 +25,60 @@ public class DBHandler{
 
 		//try to establish a connection
 		try {
-			connection = ds.getConnection(User.getInstance().getRole(), null);
+			connection = ds.getConnection("guest", null);
 		} catch (SQLException e) {
 			System.err.println("Error: failed to connect" + e.getMessage());
 			return;
 		}
 		System.out.println("Connection Succesfull!");
+	}
+	
+	public boolean login(String username, String password){
+		connect();
+		if(connection != null){
+			statement = null;
+			try {
+				statement = connection.createStatement();
+			} catch (SQLException e) {
+				System.err.println("Error: failed to create statement" + e.getMessage());
+				return false;
+			}
 
-		//create a statement
-		statement = null;
-		try {
-			statement = connection.createStatement();
-		} catch (SQLException e) {
-			System.err.println("Error: failed to create statement" + e.getMessage());
+			try {
+				result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
+			} catch (SQLException e) {
+				System.err.println("Error: could not retrieve a result " + e.getMessage());
+				return false;
+			}
+			
+			if(result != null){
+				disconnect();
+			}
+
+//			//set user variables
+//			try {
+//				//place yourself on the first result row
+//				result.first();
+//				User.getInstance().setName(result.getString("name"));
+//				User.getInstance().setPhone(result.getString("phone"));
+//				User.getInstance().setEmail(result.getString("email"));
+//				User.getInstance().setRole(result.getString("role"));
+//				
+//				System.out.println(User.getInstance().getName());
+//
+//			} catch (SQLException e) {
+//				System.err.println("Error: Could not find user " + e.getMessage());
+//				return false;
+//			}
+//			// returns true if everything went as planned
+//			System.out.println("true");
+//			return true;
 		}
-
-		try {
-			result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
-		} catch (SQLException e) {
-			System.err.println("Error: could not retrieve a result " + e.getMessage());
-		}
-
-
-		//set user variables
-		try {
-			//place yourself on the first result row
-			result.first();
-			User.getInstance().setName(result.getString("name"));
-			User.getInstance().setPhone(result.getString("phone"));
-			User.getInstance().setEmail(result.getString("email"));
-			User.getInstance().setRole(result.getString("role"));
-
-		} catch (SQLException e) {
-			System.err.println("Error: Could not find user " + e.getMessage());
-		}
+		return false;
 	}
 
 	//Closes all resources
-	public void closeConnection(){
+	public void disconnect(){
 		if(result != null){
 			try {
 				result.close();
@@ -88,8 +104,9 @@ public class DBHandler{
 	
 	public void search(String input){
 		try {
-			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
-					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+//			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
+//					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+			statement.executeUpdate("INSERT INTO ticket(event_id, price, customer_id) VALUES('1', '100', '1')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
