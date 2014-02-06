@@ -1,14 +1,13 @@
 package se.ticketbooker.www;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-public class DBHandler extends Subject{
+public class DBHandler{
 	//Instance variable declaration
 	private MysqlDataSource ds;
 	private Connection connection;
@@ -91,7 +90,6 @@ public class DBHandler extends Subject{
 		try {
 			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
 					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
-			notifyObservers();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

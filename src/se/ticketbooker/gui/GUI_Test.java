@@ -1,8 +1,8 @@
 package se.ticketbooker.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -17,26 +17,25 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import se.ticketbooker.www.DBHandler;
-import se.ticketbooker.www.Observer;
 
-
-public class GUI_Test extends JFrame implements Observer
-{
-	
-	
-	private JPanel contentPane;
+@SuppressWarnings("serial")
+public class GUI_Test extends JFrame
+{	
+	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, fillPanel, bodyPanel, eventContents;
 	private JTextField searchTextField;
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;
+	private JButton loginButton, registerButton, searchButton;
+	private JLabel iconLabel;
+	private JScrollBar scrollbar;
 	
-	public GUI_Test(DBHandler dbh)
+	public GUI_Test()
 	{
-		dbh.addObserver(this);
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
 		setResizable(false);
 		setType(Type.UTILITY);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
@@ -44,23 +43,24 @@ public class GUI_Test extends JFrame implements Observer
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel header = new JPanel();
-		contentPane.add(header, BorderLayout.NORTH);
-		header.setLayout(new BorderLayout(0, 0));
+		headerPanel = new JPanel();
+		headerPanel.setLayout(new BorderLayout(0, 0));
+		contentPane.add(headerPanel, BorderLayout.NORTH);
 		
-		JPanel logo = new JPanel();
-		header.add(logo, BorderLayout.NORTH);
-		logo.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
-		logo.add(lblNewLabel);
+		logoPanel = new JPanel();
+		headerPanel.add(logoPanel, BorderLayout.NORTH);
+		logoPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel buttons = new JPanel();
-		header.add(buttons);
-		buttons.setLayout(new GridLayout(0, 7, 0, 0));
+		iconLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
+		logoPanel.add(iconLabel);
+		
+		buttonPanel = new JPanel();
+		headerPanel.add(buttonPanel);
+		buttonPanel.setLayout(new GridLayout(0, 7, 0, 0));
 		
 		searchTextField = new JTextField();
-		buttons.add(searchTextField);
+		buttonPanel.add(searchTextField);
 		searchTextField.setText("Search");
 		searchTextField.setColumns(10);
 		searchTextField.addFocusListener(new FocusListener(){
@@ -80,7 +80,7 @@ public class GUI_Test extends JFrame implements Observer
 			}
 		});
 		
-		JButton searchButton = new JButton("Search");
+		searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -90,13 +90,13 @@ public class GUI_Test extends JFrame implements Observer
 			}
 			
 		});
-		buttons.add(searchButton);
+		buttonPanel.add(searchButton);
 		
-		JPanel empty_panel_1 = new JPanel();
-		buttons.add(empty_panel_1);
+		fillPanel = new JPanel();
+		buttonPanel.add(fillPanel);
 		
 		usernameTextField = new JTextField();
-		buttons.add(usernameTextField);
+		buttonPanel.add(usernameTextField);
 		usernameTextField.setText("Username");
 		usernameTextField.setColumns(10);
 		usernameTextField.addFocusListener(new FocusListener(){
@@ -115,7 +115,7 @@ public class GUI_Test extends JFrame implements Observer
 		});
 		
 		passwordTextField = new JTextField();
-		buttons.add(passwordTextField);
+		buttonPanel.add(passwordTextField);
 		passwordTextField.setText("Password");
 		passwordTextField.setColumns(10);
 		passwordTextField.addFocusListener(new FocusListener(){
@@ -133,31 +133,30 @@ public class GUI_Test extends JFrame implements Observer
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Login");
-		buttons.add(btnNewButton_1);
+		loginButton = new JButton("Login");
+		buttonPanel.add(loginButton);
 		
-		JButton btnNewButton_2 = new JButton("Register");
-		buttons.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
+		registerButton = new JButton("Register");
+		buttonPanel.add(registerButton);
+		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		
-		JPanel body = new JPanel();
-		contentPane.add(body);
-		body.setLayout(new BorderLayout(0, 0));
+		bodyPanel = new JPanel();
+		contentPane.add(bodyPanel);
+		bodyPanel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollBar scrollBar = new JScrollBar();
-		body.add(scrollBar, BorderLayout.EAST);
+		scrollbar = new JScrollBar();
+		bodyPanel.add(scrollbar, BorderLayout.EAST);
 		
-		JPanel eventContents = new JPanel();
+		eventContents = new JPanel();
 		eventContents.setBackground(Color.WHITE);
-		body.add(eventContents, BorderLayout.CENTER);
+		bodyPanel.add(eventContents, BorderLayout.CENTER);
 	}
 
-	@Override
-	public void update() 
-	{
-		// DO STUFF
+	public void addButtonListener(ActionListener listener) {
+		searchButton.addActionListener(listener);
+		loginButton.addActionListener(listener);
 	}
 }
