@@ -16,7 +16,8 @@ public class MainController {
 		
 		this.gui.addButtonListener(new ButtonListener());
 	}
-
+	
+	//ActionListener for the GUI
 	private class ButtonListener implements ActionListener {
 
 		@Override
@@ -28,6 +29,7 @@ public class MainController {
 	}
 
 
+	//main method
 	public static void main(String[] args){
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 
