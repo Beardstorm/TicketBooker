@@ -60,7 +60,6 @@ public class GUI_Test extends JFrame
 		buttonPanel.setLayout(new GridLayout(0, 7, 0, 0));
 		
 		searchTextField = new JTextField();
-		buttonPanel.add(searchTextField);
 		searchTextField.setText("Search");
 		searchTextField.setColumns(10);
 		searchTextField.addFocusListener(new FocusListener(){
@@ -79,24 +78,16 @@ public class GUI_Test extends JFrame
 				}
 			}
 		});
+		buttonPanel.add(searchTextField);
 		
 		searchButton = new JButton("Search");
-		searchButton.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-			}
-			
-		});
+		searchButton.setActionCommand("search");
 		buttonPanel.add(searchButton);
 		
 		fillPanel = new JPanel();
 		buttonPanel.add(fillPanel);
 		
 		usernameTextField = new JTextField();
-		buttonPanel.add(usernameTextField);
 		usernameTextField.setText("Username");
 		usernameTextField.setColumns(10);
 		usernameTextField.addFocusListener(new FocusListener(){
@@ -113,9 +104,9 @@ public class GUI_Test extends JFrame
 				}
 			}
 		});
+		buttonPanel.add(usernameTextField);
 		
 		passwordTextField = new JTextField();
-		buttonPanel.add(passwordTextField);
 		passwordTextField.setText("Password");
 		passwordTextField.setColumns(10);
 		passwordTextField.addFocusListener(new FocusListener(){
@@ -132,16 +123,15 @@ public class GUI_Test extends JFrame
 				}
 			}
 		});
+		buttonPanel.add(passwordTextField);
 		
 		loginButton = new JButton("Login");
+		loginButton.setActionCommand("login");
 		buttonPanel.add(loginButton);
 		
 		registerButton = new JButton("Register");
+		registerButton.setActionCommand("register");
 		buttonPanel.add(registerButton);
-		registerButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		bodyPanel = new JPanel();
 		contentPane.add(bodyPanel);
@@ -158,5 +148,14 @@ public class GUI_Test extends JFrame
 	public void addButtonListener(ActionListener listener) {
 		searchButton.addActionListener(listener);
 		loginButton.addActionListener(listener);
+		registerButton.addActionListener(listener);
+	}
+	
+	public JTextField getPasswordField(){
+		return passwordTextField;
+	}
+	
+	public JTextField getUsernameField(){
+		return usernameTextField;
 	}
 }

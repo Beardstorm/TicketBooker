@@ -22,7 +22,22 @@ public class MainController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			String action = e.getActionCommand();
+			
+			switch(action){
+			case "search":
+				System.out.println("search");
+				db.connect("guest@localhost.com", "guest");
+				break;
+			case "login":
+				db.connect(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+				break;
+			case "register":
+				System.out.println("register");
+				break;
+			default:
+				System.out.println("default");
+			}
 
 		}
 
