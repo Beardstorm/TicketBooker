@@ -28,6 +28,8 @@ public class MainController {
 			case "search":
 				System.out.println("search");
 				db.connect("guest@localhost.com", "guest");
+				//do stuff
+				db.closeConnection();
 				break;
 			case "login":
 				db.connect(gui.getUsernameField().getText(), gui.getPasswordField().getText());

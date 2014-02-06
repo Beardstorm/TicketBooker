@@ -1,9 +1,8 @@
 package se.ticketbooker.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Scrollbar;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -14,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -21,7 +21,8 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class GUI_Test extends JFrame
 {	
-	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, fillPanel, bodyPanel, eventContents;
+	private JTabbedPane tabPane;
+	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, fillPanel, bodyPanel, eventContents, loginPanel, registerPanel;
 	private JTextField searchTextField;
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;
@@ -133,12 +134,24 @@ public class GUI_Test extends JFrame
 		registerButton.setActionCommand("register");
 		buttonPanel.add(registerButton);
 		
-		bodyPanel = new JPanel();
-		contentPane.add(bodyPanel);
-		bodyPanel.setLayout(new BorderLayout(0, 0));
+		tabPane = new JTabbedPane();
+		contentPane.add(tabPane);
 		
+		bodyPanel = new JPanel();
+		bodyPanel.setLayout(new BorderLayout(0, 0));
 		scrollbar = new JScrollBar();
 		bodyPanel.add(scrollbar, BorderLayout.EAST);
+		
+		
+		loginPanel = new JPanel();
+		loginPanel.setLayout(new FlowLayout());
+		
+		registerPanel = new JPanel();
+		registerPanel.setLayout(new FlowLayout());
+		
+		tabPane.addTab("Search", bodyPanel);
+		tabPane.addTab("Login", loginPanel);
+		tabPane.addTab("Register", registerPanel);
 		
 		eventContents = new JPanel();
 		eventContents.setBackground(Color.WHITE);

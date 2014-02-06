@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.TextArea;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -45,6 +46,20 @@ public class TabPane extends JFrame{
 		
 		topPanel.add( tabbedPane, BorderLayout.CENTER );
 	}
+	
+//	public void addButtonListener(ActionListener listener) {
+//		searchButton.addActionListener(listener);
+//		loginButton.addActionListener(listener);
+//		registerButton.addActionListener(listener);
+//	}
+//	
+//	public JTextField getPasswordField(){
+//		return passwordTextField;
+//	}
+//	
+//	public JTextField getUsernameField(){
+//		return usernameTextField;
+//	}
 
 	public void createPage1()
 	{
