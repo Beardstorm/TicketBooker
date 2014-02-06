@@ -12,23 +12,40 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.RowSpec;
+
+
 
 
 @SuppressWarnings("serial")
 public class GUI_Test extends JFrame
 {	
-	private JTabbedPane tabPane;
-	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, fillPanel, bodyPanel, eventContents, loginPanel, registerPanel;
+	private JTabbedPane tabPanel;
+	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel;
 	private JTextField searchTextField;
-	private JTextField usernameTextField;
-	private JTextField passwordTextField;
-	private JButton loginButton, registerButton, searchButton;
+	private JTextField emailTextFieldLogin;
+	private JTextField passwordTextFieldLogin;
+	private JButton loginButton, searchButton, registerButton;
 	private JLabel iconLabel;
-	private JScrollBar scrollbar;
+	private JScrollBar searchTabScrollbar;
+	private JPanel headerPanelLoginPanel;
+	private JPanel headerPanelFillPanel;
+	private JTextField emailTextFieldRegister;
+	private JTextField passwordTextFieldRegister;
+	private JTextField nameTextFieldRegister;
+	private JTextField phonenrTextFieldRegister;
+	private JPanel searchTabPanelContentHeader;
+	private JPanel searchTabPanelContentBody;
 	
 	public GUI_Test()
 	{
@@ -38,7 +55,7 @@ public class GUI_Test extends JFrame
 		setType(Type.UTILITY);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -58,104 +75,98 @@ public class GUI_Test extends JFrame
 		
 		buttonPanel = new JPanel();
 		headerPanel.add(buttonPanel);
-		buttonPanel.setLayout(new GridLayout(0, 7, 0, 0));
+		buttonPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		searchTextField = new JTextField();
-		searchTextField.setText("Search");
-		searchTextField.setColumns(10);
-		searchTextField.addFocusListener(new FocusListener(){
-			@Override
-			public void focusGained(FocusEvent e)
-			{
-				if(searchTextField.getText().equals("Search")){
-					searchTextField.setText("");
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e){
-				
-				if(searchTextField.getText().isEmpty()){
-					searchTextField.setText("Search");
-				}
-			}
-		});
-		buttonPanel.add(searchTextField);
+		headerPanelFillPanel = new JPanel();
+		buttonPanel.add(headerPanelFillPanel);
 		
-		searchButton = new JButton("Search");
-		searchButton.setActionCommand("search");
-		buttonPanel.add(searchButton);
+		headerPanelLoginPanel = new JPanel();
+		buttonPanel.add(headerPanelLoginPanel);
+		headerPanelLoginPanel.setLayout(new GridLayout(1, 3, 0, 0));
 		
-		fillPanel = new JPanel();
-		buttonPanel.add(fillPanel);
+		emailTextFieldLogin = new JTextField();
+		headerPanelLoginPanel.add(emailTextFieldLogin);
+		emailTextFieldLogin.setText("Email");
+		emailTextFieldLogin.setColumns(10);
+		emailTextFieldLogin.addFocusListener(new CustomFocusListener(emailTextFieldLogin));
 		
-		usernameTextField = new JTextField();
-		usernameTextField.setText("Username");
-		usernameTextField.setColumns(10);
-		usernameTextField.addFocusListener(new FocusListener(){
-			@Override
-			public void focusGained(FocusEvent e)
-			{
-				if(usernameTextField.getText().equals("Username"))
-					usernameTextField.setText("");
-			}
-			public void focusLost(FocusEvent e){
-				
-				if(usernameTextField.getText().isEmpty()){
-					usernameTextField.setText("Username");
-				}
-			}
-		});
-		buttonPanel.add(usernameTextField);
-		
-		passwordTextField = new JTextField();
-		passwordTextField.setText("Password");
-		passwordTextField.setColumns(10);
-		passwordTextField.addFocusListener(new FocusListener(){
-			@Override
-			public void focusGained(FocusEvent e)
-			{
-				if(passwordTextField.getText().equals("Password"))
-					passwordTextField.setText("");
-			}
-			public void focusLost(FocusEvent e){
-				
-				if(passwordTextField.getText().isEmpty()){
-					passwordTextField.setText("Password");
-				}
-			}
-		});
-		buttonPanel.add(passwordTextField);
+		passwordTextFieldLogin = new JPasswordField();
+		headerPanelLoginPanel.add(passwordTextFieldLogin);
+		passwordTextFieldLogin.setText("Password");
+		passwordTextFieldLogin.setColumns(10);
+		passwordTextFieldLogin.addFocusListener(new CustomFocusListener(passwordTextFieldLogin));
 		
 		loginButton = new JButton("Login");
+		headerPanelLoginPanel.add(loginButton);
 		loginButton.setActionCommand("login");
-		buttonPanel.add(loginButton);
+		
+
+		
+		
+		tabPanel = new JTabbedPane();
+		contentPane.add(tabPanel);
+		
+		searchTabPanel = new JPanel();
+		searchTabPanel.setLayout(new BorderLayout(0, 0));
+		searchTabScrollbar = new JScrollBar();
+		searchTabPanel.add(searchTabScrollbar, BorderLayout.EAST);
+		
+		registerTabPanel = new JPanel();
+		
+		tabPanel.addTab("Search", searchTabPanel);
+		tabPanel.addTab("Register", registerTabPanel);
+		registerTabPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		emailTextFieldRegister = new JTextField();
+		emailTextFieldRegister.setText("Email");
+		emailTextFieldRegister.setColumns(10);
+		registerTabPanel.add(emailTextFieldRegister);
+		emailTextFieldRegister.addFocusListener(new CustomFocusListener(emailTextFieldRegister));
+		
+		passwordTextFieldRegister = new JPasswordField();
+		passwordTextFieldRegister.setText("Password");
+		passwordTextFieldRegister.setColumns(10);
+		registerTabPanel.add(passwordTextFieldRegister);
+		passwordTextFieldRegister.addFocusListener(new CustomFocusListener(passwordTextFieldRegister));
+		
+		nameTextFieldRegister = new JTextField();
+		nameTextFieldRegister.setText("Name");
+		registerTabPanel.add(nameTextFieldRegister);
+		nameTextFieldRegister.setColumns(10);
+		nameTextFieldRegister.addFocusListener(new CustomFocusListener(nameTextFieldRegister));
+		
+		phonenrTextFieldRegister = new JTextField();
+		phonenrTextFieldRegister.setText("Phone Number");
+		registerTabPanel.add(phonenrTextFieldRegister);
+		phonenrTextFieldRegister.setColumns(10);
+		phonenrTextFieldRegister.addFocusListener(new CustomFocusListener(phonenrTextFieldRegister));
 		
 		registerButton = new JButton("Register");
 		registerButton.setActionCommand("register");
-		buttonPanel.add(registerButton);
+		registerTabPanel.add(registerButton);
 		
-		tabPane = new JTabbedPane();
-		contentPane.add(tabPane);
+		searchTabPanelContent = new JPanel();
+		searchTabPanelContent.setBackground(Color.WHITE);
+		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
+		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
 		
-		bodyPanel = new JPanel();
-		bodyPanel.setLayout(new BorderLayout(0, 0));
-		scrollbar = new JScrollBar();
-		bodyPanel.add(scrollbar, BorderLayout.EAST);
+		searchTabPanelContentHeader = new JPanel();
+		FlowLayout fl_searchTabPanelContentHeader = (FlowLayout) searchTabPanelContentHeader.getLayout();
+		fl_searchTabPanelContentHeader.setAlignment(FlowLayout.LEFT);
+		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
 		
+		searchTextField = new JTextField();
+		searchTabPanelContentHeader.add(searchTextField);
+		searchTextField.setText("Search");
+		searchTextField.setColumns(25);
+		searchTextField.addFocusListener(new CustomFocusListener(searchTextField));
 		
-		loginPanel = new JPanel();
-		loginPanel.setLayout(new FlowLayout());
+		searchButton = new JButton("Search");
+		searchTabPanelContentHeader.add(searchButton);
+		searchButton.setActionCommand("search");
 		
-		registerPanel = new JPanel();
-		registerPanel.setLayout(new FlowLayout());
-		
-		tabPane.addTab("Search", bodyPanel);
-		tabPane.addTab("Login", loginPanel);
-		tabPane.addTab("Register", registerPanel);
-		
-		eventContents = new JPanel();
-		eventContents.setBackground(Color.WHITE);
-		bodyPanel.add(eventContents, BorderLayout.CENTER);
+		searchTabPanelContentBody = new JPanel();
+		searchTabPanelContent.add(searchTabPanelContentBody, BorderLayout.CENTER);
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -165,10 +176,12 @@ public class GUI_Test extends JFrame
 	}
 	
 	public JTextField getPasswordField(){
-		return passwordTextField;
+		return passwordTextFieldLogin;
 	}
 	
 	public JTextField getUsernameField(){
-		return usernameTextField;
+		return emailTextFieldLogin;
 	}
+	
+
 }
