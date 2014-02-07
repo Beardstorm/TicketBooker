@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import se.ticketbooker.gui.GUI_Test;
 import se.ticketbooker.www.DBHandler;
+import se.ticketbooker.www.User;
 
 public class MainController {
 	private GUI_Test gui;
@@ -27,15 +28,48 @@ public class MainController {
 			switch(action){
 			case "search":
 				System.out.println("search");
-				db.connect("guest@localhost.com", "guest");
+				db.connect();
 				//do stuff
 				db.closeConnection();
 				break;
 			case "login":
-				db.connect(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+				db.connect();
+				User member = new User();
+				try {
+					member = db.getUserbymail(gui.getUsernameField().getText(),gui.getPasswordField().getText());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				String mail = member.getEmail();
+				String pass = member.getPassword();
+				String loginName = gui.getUsernameField().getText();
+				String loginPass = gui.getPasswordField().getText();
+				String role = member.getRole();
+				
+				
+				if(loginName.equals(mail) && loginPass.equals(pass)){
+					System.out.println("member logged in");
+					//.....
+					db.closeConnection();
+				}
 				break;
-			case "register":
-				System.out.println("register");
+			case "Register":
+				db.connect();
+				User newuser = new User();
+				newuser.setName(gui.getNameTextFieldRegister().getText());
+				newuser.setEmail(gui.getEmailTextFieldRegister().getText());
+				newuser.setPhone(gui.getPhonenrTextFieldRegister().getText());
+				newuser.setPassword(gui.getPasswordTextFieldRegister().getText());
+				
+				String name = newuser.getName();
+				String email = newuser.getEmail();
+				String password = newuser.getPassword();
+				String phone = newuser.getPhone();
+				
+				db.registerUser(name, password, email, phone);
+				db.closeConnection();
+				System.out.println(name);
 				break;
 			default:
 				System.out.println("default");

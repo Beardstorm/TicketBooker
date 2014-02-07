@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import se.ticketbooker.www.User;
+
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DBHandler{
@@ -14,7 +16,7 @@ public class DBHandler{
 	private Statement statement;
 	private ResultSet result;
 
-	public void connect(String username, String password)
+	public void connect()
 	{
 		ds = new MysqlDataSource();
 		ds.setServerName("localhost");
@@ -40,25 +42,7 @@ public class DBHandler{
 			System.err.println("Error: failed to create statement" + e.getMessage());
 		}
 
-		try {
-			result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
-		} catch (SQLException e) {
-			System.err.println("Error: could not retrieve a result " + e.getMessage());
-		}
-
-
-		//set user variables
-		try {
-			//place yourself on the first result row
-			result.first();
-			User.getInstance().setName(result.getString("name"));
-			User.getInstance().setPhone(result.getString("phone"));
-			User.getInstance().setEmail(result.getString("email"));
-			User.getInstance().setRole(result.getString("role"));
-
-		} catch (SQLException e) {
-			System.err.println("Error: Could not find user " + e.getMessage());
-		}
+		
 	}
 
 	//Closes all resources
@@ -95,8 +79,45 @@ public class DBHandler{
 			e.printStackTrace();
 		}
 	}
-
-
-
-
+	
+	
+		
+	 public User getUserbymail(String mail, String password) throws Exception {
+		    try {
+		    	
+		      result = statement.executeQuery("SELECT * FROM account where email = '"+ mail+ "'AND password ='"+password+"'");
+		      User member = new User();
+		     
+		      while (result.next()) {
+		      		      	  
+		    	  member.setName(result.getString("name"));
+		    	  member.setPassword(result.getString("password"));
+		    	  member.setPhone(result.getString("phone"));
+		    	  member.setEmail( result.getString("email"));
+		    	  member.setRole(result.getString("role"));
+		          
+		      	      } 
+		      return member; 
+		      
+		    } catch (Exception e) {
+		      throw e;
+		     
+		    } finally {
+		      
+		    }
+				    
+		  }
+	  
+	
+	public void registerUser( String name, String password, String mail, String phone)  {
+	    try {
+	    	
+	      	statement.executeUpdate("INSERT INTO ticnet.account SET Name='"+name+
+	      			"',phone='"+phone+"',email='"+mail+"',password='"+password+"'");
+	      	
+	      
+	    } catch (SQLException e) {
+	    	e.printStackTrace();
+ 		}
+	}
 }

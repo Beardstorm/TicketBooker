@@ -7,8 +7,9 @@ public class User {
 	private String phone;
 	private String email;
 	private String role;
+	private String password;
 	
-	private User(){
+	public User(){
 		role = "guest";
 	}
 	
@@ -49,5 +50,12 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

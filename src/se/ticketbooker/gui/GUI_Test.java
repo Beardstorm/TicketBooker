@@ -2,8 +2,10 @@ package se.ticketbooker.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,6 +33,7 @@ public class GUI_Test extends JFrame
 	private JScrollBar searchTabScrollbar;
 	private JPanel headerPanelLoginPanel;
 	private JPanel headerPanelFillPanel;
+	private JLabel lblemail, lblpassword, lblname, lblphone; 
 	private JTextField emailTextFieldRegister;
 	private JTextField passwordTextFieldRegister;
 	private JTextField nameTextFieldRegister;
@@ -56,9 +59,15 @@ public class GUI_Test extends JFrame
 		searchButton = new JButton("Search");
 		registerTabPanel = new JPanel();
 		registerButton = new JButton("Register");
+		lblname = new JLabel("Full Name *");
+		lblemail = new JLabel("E-mail *");
+		lblpassword = new JLabel("Password *");
+		lblphone = new JLabel("Phone No *");
 		passwordTextFieldRegister = new JPasswordField();
 		emailTextFieldRegister = new JTextField();
 		phonenrTextFieldRegister = new JTextField();
+		nameTextFieldRegister = new JTextField();
+		
 		searchTabPanelContentBody = new JPanel();
 		searchTextField = new JTextField();
 		searchTabPanelContent = new JPanel();
@@ -108,30 +117,40 @@ public class GUI_Test extends JFrame
 		
 		tabPanel.addTab("Search", searchTabPanel);
 		tabPanel.addTab("Register", registerTabPanel);
-		registerTabPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		registerTabPanel.setLayout(null);
 		
-		emailTextFieldRegister.setText("Email");
-		emailTextFieldRegister.setColumns(10);
-		registerTabPanel.add(emailTextFieldRegister);
-		emailTextFieldRegister.addFocusListener(new CustomFocusListener(emailTextFieldRegister));
+		lblemail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblemail.setBounds(107, 80, 82, 14);
+		registerTabPanel.add(lblemail);
 		
-		passwordTextFieldRegister.setText("Password");
-		passwordTextFieldRegister.setColumns(10);
-		registerTabPanel.add(passwordTextFieldRegister);
-		passwordTextFieldRegister.addFocusListener(new CustomFocusListener(passwordTextFieldRegister));
+		lblname.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblname.setBounds(107, 37, 82, 14);
+		registerTabPanel.add(lblname);
 		
-		nameTextFieldRegister = new JTextField();
-		nameTextFieldRegister.setText("Name");
+		lblpassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblpassword.setBounds(107, 122, 82, 14);
+		registerTabPanel.add(lblpassword);
+		
+		lblphone.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblphone.setBounds(107, 164, 82, 14);
+		registerTabPanel.add(lblphone);
+		
+		nameTextFieldRegister.setBounds(221, 35, 130, 20);
 		registerTabPanel.add(nameTextFieldRegister);
-		nameTextFieldRegister.setColumns(10);
-		nameTextFieldRegister.addFocusListener(new CustomFocusListener(nameTextFieldRegister));
+		nameTextFieldRegister.setColumns(18);
 		
-		phonenrTextFieldRegister.setText("Phone Number");
+		emailTextFieldRegister.setBounds(221, 78, 130, 20);
+		registerTabPanel.add(emailTextFieldRegister);
+		emailTextFieldRegister.setColumns(18);
+		
+		passwordTextFieldRegister.setBounds(221, 120, 130, 20);
+		registerTabPanel.add(passwordTextFieldRegister);
+		
+		phonenrTextFieldRegister.setBounds(221, 158, 130, 20);
 		registerTabPanel.add(phonenrTextFieldRegister);
-		phonenrTextFieldRegister.setColumns(10);
-		phonenrTextFieldRegister.addFocusListener(new CustomFocusListener(phonenrTextFieldRegister));
+		phonenrTextFieldRegister.setColumns(18);
 		
-		registerButton.setActionCommand("register");
+		registerButton.setBounds(314, 231, 102, 23);
 		registerTabPanel.add(registerButton);
 		
 		searchTabPanelContent.setBackground(Color.WHITE);
@@ -175,5 +194,19 @@ public class GUI_Test extends JFrame
 		return emailTextFieldLogin;
 	}
 	
+	public JTextField getNameTextFieldRegister(){
+		return nameTextFieldRegister;
+	}
 
+	public JTextField getEmailTextFieldRegister(){
+		return emailTextFieldRegister;
+	}
+	
+	public JTextField getPasswordTextFieldRegister(){
+		return passwordTextFieldRegister;
+	}
+	
+	public JTextField getPhonenrTextFieldRegister(){
+		return phonenrTextFieldRegister;
+	}
 }
