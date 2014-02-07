@@ -30,16 +30,16 @@ public class MainController {
 			switch(action){
 			case "search":
 				System.out.println("search");
-<<<<<<< HEAD
+
 				db.connect();
-=======
+
 				db.search("Stockholm");
->>>>>>> 84b70224db7554467c0337be5f8ac778f0d07075
+
 				//do stuff
 				db.disconnect();
 				break;
 			case "login":
-<<<<<<< HEAD
+
 				db.connect();
 				User member = new User();
 				try {
@@ -60,10 +60,10 @@ public class MainController {
 					//.....
 					db.closeConnection();
 				}
-=======
+
 				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
 				
->>>>>>> 84b70224db7554467c0337be5f8ac778f0d07075
+
 				break;
 			case "Register":
 				db.connect();
