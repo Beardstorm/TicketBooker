@@ -28,47 +28,37 @@ public class DBHandler{
 		//try to establish a connection
 		try {
 			connection = ds.getConnection("guest", null);
+			System.out.println("Connection Succesfull!");
 		} catch (SQLException e) {
 			System.err.println("Error: failed to connect" + e.getMessage());
 			return;
 		}
-		System.out.println("Connection Succesfull!");
-	}
 
-	public boolean login(String username, String password){
-		connect();
 		if(connection != null){
 			statement = null;
 			try {
 				statement = connection.createStatement();
 			} catch (SQLException e) {
 				System.err.println("Error: failed to create statement" + e.getMessage());
-				return false;
+				return;
 			}
+		}
 
-			//create a statement
-			statement = null;
-			try {
-				statement = connection.createStatement();
-			} catch (SQLException e) {
-				System.err.println("Error: failed to create statement" + e.getMessage());
-			}
+	}
 
-			try {
-				result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
-			} catch (SQLException e) {
-				System.err.println("Error: could not retrieve a result " + e.getMessage());
-				return false;
-			}
 
-			if(result != null){
-				disconnect();
-			}
 
+	public void login(String username, String password){
+
+		try {
+			result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
+		} catch (SQLException e) {
+			System.err.println("Error: could not retrieve a result " + e.getMessage());
 
 		}
-		return false;
+
 	}
+
 
 	//Closes all resources
 	public void disconnect(){
@@ -94,6 +84,8 @@ public class DBHandler{
 			}
 		}
 	}
+
+
 
 	public void search(String input){
 		try {
@@ -139,7 +131,7 @@ public class DBHandler{
 		try {
 
 			statement.executeUpdate("INSERT INTO ticnet.account SET Name='"+name+
-					"',phone='"+phone+"',email='"+mail+"',password='"+password+"'");
+					"',phone='"+phone+"',email='"+mail+"',password='"+password+"', role='member'");
 
 
 		} catch (SQLException e) {
