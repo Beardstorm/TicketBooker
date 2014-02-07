@@ -12,7 +12,6 @@ public class CustomFocusListener implements FocusListener
 	
 	public CustomFocusListener(JTextField textField) 
 	{
-		System.out.println("Text Field: "+textField.getText());
 		defaultText = textField.getText();
 		mTextField = textField;
 	}
