@@ -31,15 +31,21 @@ public class MainController {
 			case "search":
 				System.out.println("search");
 
+<<<<<<< HEAD
 				db.connect();
 
 				db.search("Stockholm");
 
+=======
+>>>>>>> 2ba0706c7c61ef93ff2385e5c21b6df7c713a422
 				//do stuff
 				db.disconnect();
 				break;
 			case "login":
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ba0706c7c61ef93ff2385e5c21b6df7c713a422
 				db.connect();
 				User member = new User();
 				try {
@@ -58,12 +64,15 @@ public class MainController {
 				if(loginName.equals(mail) && loginPass.equals(pass)){
 					System.out.println("member logged in");
 					//.....
-					db.closeConnection();
+					db.disconnect();
 				}
 
 				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+<<<<<<< HEAD
 				
 
+=======
+>>>>>>> 2ba0706c7c61ef93ff2385e5c21b6df7c713a422
 				break;
 			case "Register":
 				db.connect();
@@ -79,7 +88,7 @@ public class MainController {
 				String phone = newuser.getPhone();
 				
 				db.registerUser(name, password, email, phone);
-				db.closeConnection();
+				db.disconnect();
 				System.out.println(name);
 				break;
 			default:
