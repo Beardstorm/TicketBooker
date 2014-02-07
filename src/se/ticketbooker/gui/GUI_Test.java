@@ -37,6 +37,7 @@ public class GUI_Test extends JFrame
 	private JTextField phonenrTextFieldRegister;
 	private JPanel searchTabPanelContentHeader;
 	private JPanel searchTabPanelContentBody;
+
 	
 	public GUI_Test()
 	{
