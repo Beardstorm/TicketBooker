@@ -9,6 +9,8 @@ import se.ticketbooker.www.DBHandler;
 public class MainController {
 	private GUI_Test gui;
 	private DBHandler db;
+	
+	// ROW ADDED FOR GITHUB TEST
 
 	public MainController(GUI_Test gui, DBHandler db){
 		this.gui = gui;
