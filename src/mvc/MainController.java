@@ -3,6 +3,8 @@ package mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import se.ticketbooker.gui.GUI_Test;
 import se.ticketbooker.www.DBHandler;
 import se.ticketbooker.www.User;
@@ -48,15 +50,27 @@ public class MainController {
 				String loginName = gui.getUsernameField().getText();
 				String loginPass = gui.getPasswordField().getText();
 				String role = member.getRole();
+				String uname =member.getName();
 				
-				
+				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
 				if(loginName.equals(mail) && loginPass.equals(pass)){
+					gui.getloggedLabel().setVisible(true);
+					gui.getloggedLabel().setText(uname +" " + "is logged in");
 					System.out.println("member logged in");
 					//.....
-					db.disconnect();
+									
 				}
+			else {//login error messages
+				JOptionPane.showMessageDialog(gui,
+					    "Invalid Username or Password..Try again",
+					    "Login error",
+					    JOptionPane.ERROR_MESSAGE);
 
-				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
+
+			}
+
+				db.disconnect();
+				
 				break;
 			case "Register":
 				db.connect();
@@ -72,8 +86,9 @@ public class MainController {
 				String phone = newuser.getPhone();
 				
 				db.registerUser(name, password, email, phone);
+				gui.getRegisterButton().setEnabled(false);
+				gui.getRegisterMessage().setText("Registration is successful");
 				db.disconnect();
-				System.out.println(name);
 				break;
 			default:
 				System.out.println("default");
@@ -81,6 +96,7 @@ public class MainController {
 
 		}
 
+		
 	}
 
 

@@ -16,6 +16,15 @@ import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
+import javax.swing.JScrollPane;
+import javax.swing.border.MatteBorder;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import java.awt.SystemColor;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
 
 
 
@@ -39,7 +48,8 @@ public class GUI_Test extends JFrame
 	private JTextField nameTextFieldRegister;
 	private JTextField phonenrTextFieldRegister;
 	private JPanel searchTabPanelContentHeader;
-	private JPanel searchTabPanelContentBody;
+	private JLabel loggeduserLabel;
+	private JLabel registerMessageLabel;
 
 	
 	public GUI_Test()
@@ -68,8 +78,6 @@ public class GUI_Test extends JFrame
 		emailTextFieldRegister = new JTextField();
 		phonenrTextFieldRegister = new JTextField();
 		nameTextFieldRegister = new JTextField();
-		
-		searchTabPanelContentBody = new JPanel();
 		searchTextField = new JTextField();
 		searchTabPanelContent = new JPanel();
 		
@@ -136,25 +144,30 @@ public class GUI_Test extends JFrame
 		lblphone.setBounds(107, 164, 82, 14);
 		registerTabPanel.add(lblphone);
 		
-		nameTextFieldRegister.setBounds(221, 35, 130, 20);
+		nameTextFieldRegister.setBounds(221, 35, 165, 20);
 		registerTabPanel.add(nameTextFieldRegister);
 		nameTextFieldRegister.setColumns(18);
 		
-		emailTextFieldRegister.setBounds(221, 78, 130, 20);
+		emailTextFieldRegister.setBounds(221, 78, 165, 20);
 		registerTabPanel.add(emailTextFieldRegister);
 		emailTextFieldRegister.setColumns(18);
 		
-		passwordTextFieldRegister.setBounds(221, 120, 130, 20);
+		passwordTextFieldRegister.setBounds(221, 120, 165, 20);
 		registerTabPanel.add(passwordTextFieldRegister);
 		
-		phonenrTextFieldRegister.setBounds(221, 158, 130, 20);
+		phonenrTextFieldRegister.setBounds(221, 158, 165, 20);
 		registerTabPanel.add(phonenrTextFieldRegister);
 		phonenrTextFieldRegister.setColumns(18);
 		
 		registerButton.setBounds(314, 231, 102, 23);
 		registerTabPanel.add(registerButton);
 		
-		searchTabPanelContent.setBackground(Color.WHITE);
+		registerMessageLabel = new JLabel("");
+		registerMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		registerMessageLabel.setBounds(231, 321, 223, 20);
+		registerTabPanel.add(registerMessageLabel);
+		
+		searchTabPanelContent.setBackground(SystemColor.menu);
 		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
 		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
 		
@@ -170,7 +183,8 @@ public class GUI_Test extends JFrame
 		searchTabPanelContentHeader.add(searchButton);
 		searchButton.setActionCommand("search");
 		
-		searchTabPanelContent.add(searchTabPanelContentBody, BorderLayout.CENTER);
+		loggeduserLabel = new JLabel("");
+		searchTabPanelContentHeader.add(loggeduserLabel);
 		
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
@@ -209,5 +223,17 @@ public class GUI_Test extends JFrame
 	
 	public JTextField getPhonenrTextFieldRegister(){
 		return phonenrTextFieldRegister;
+	}
+	public JLabel getloggedLabel(){
+		return loggeduserLabel;
+		
+	}
+	public JLabel getRegisterMessage(){
+		return registerMessageLabel;
+		
+	}
+	public JButton getRegisterButton(){
+		return registerButton;
+		
 	}
 }
