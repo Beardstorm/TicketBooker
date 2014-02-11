@@ -34,10 +34,13 @@ public class MainController {
 				System.out.println("search");
 
 				//do stuff
+				
 				db.disconnect();
 				break;
+				
 			case "login":
 				db.connect();
+				
 				try {
 					db.login(gui.getUsernameField().getText(),gui.getPasswordField().getText());
 				} catch (Exception e1) {
@@ -48,54 +51,60 @@ public class MainController {
 				String loginName = gui.getUsernameField().getText();
 				String loginPass = gui.getPasswordField().getText();
 				
-				if(loginName.equals(User.getInstance().getEmail()) && loginPass.equals(User.getInstance().getPassword())){
-					gui.getloggedLabel().setVisible(true);
-					gui.getloggedLabel().setText(User.getInstance().getName() +" " + "is logged in");
-					System.out.println("member logged in");
-					//.....
-									
+				if(loginName.equals(User.getInstance().getEmail()) && loginPass.equals(User.getInstance().getPassword()))
+				{
+					gui.getLoginButton().setEnabled(false);
+					gui.getUsernameField().setEnabled(false);
+					gui.getPasswordField().setEnabled(false);
+					gui.getLogoutButton().setEnabled(true);
+					
+					gui.getUsernameHeaderLabel().setVisible(true);
+					gui.getUsernameHeaderLabel().setText("Logged in as " + User.getInstance().getName());
 				}
-			else {//login error messages
-				JOptionPane.showMessageDialog(gui,
+				else {//login error messages
+					JOptionPane.showMessageDialog(gui,
 					    "Invalid Username or Password..Try again",
 					    "Login error",
 					    JOptionPane.ERROR_MESSAGE);
-
-
-			}
-				gui.getLoginButton().setVisible(false);
-				gui.getLogoutButton().setVisible(true);
+				}
 
 				db.disconnect();
-				
 				break;
+				
 			case "logout":
 				db.logout();
-				gui.getLoginButton().setVisible(true);
-				gui.getLogoutButton().setVisible(false);
+				
+				gui.getLoginButton().setEnabled(true);
+				gui.getUsernameField().setEnabled(true);
+				gui.getPasswordField().setEnabled(true);
+				gui.getLogoutButton().setEnabled(false);
+				
+				gui.getUsernameHeaderLabel().setVisible(false);
+				gui.getUsernameHeaderLabel().setText("");
+				
 				break;
-			case "Register":
+				
+			case "register":
 				db.connect();
 				
-				db.registerUser(gui.getNameTextFieldRegister().getText(), gui.getPasswordTextFieldRegister().getText(),
-							gui.getEmailTextFieldRegister().getText(), gui.getPhonenrTextFieldRegister().getText());
+				db.registerUser(gui.getRegisterNameTextField().getText(), gui.getRegisterPasswordTextField().getText(),
+							gui.getRegisterEmailTextField().getText(), gui.getRegisterPhonenrTextField().getText());
 				
 				gui.getRegisterButton().setEnabled(false);
 				gui.getRegisterMessage().setText("Registration is successful");
 				try {
-					db.login(gui.getEmailTextFieldRegister().getText(), gui.getPasswordTextFieldRegister().getText());
+					db.login(gui.getRegisterEmailTextField().getText(), gui.getRegisterPasswordTextField().getText());
 				} catch (Exception e1) {
 					System.err.println("Failed to login in register method" + e1.getMessage());
 				}
+				
 				db.disconnect();
 				break;
+				
 			default:
-				System.out.println("default");
+				System.out.println("default case");
 			}
-
 		}
-
-		
 	}
 
 
@@ -110,7 +119,4 @@ public class MainController {
 
 		});
 	}
-
-
-
 }
