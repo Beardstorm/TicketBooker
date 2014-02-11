@@ -1,7 +1,7 @@
 package se.ticketbooker.www;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -17,15 +17,8 @@ public class Event extends JPanel{
 	private String ageLimit;
 	private String eventDescription;
 	private int numTickets;
-	private JButton book;
+	private JButton buyButton;
 	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, descriptionLabel, noOfTicketsLabel;
-	
-	public Event() {
-		this.setLayout(new FlowLayout());
-		this.setPreferredSize(new Dimension(200,200));
-		book = new JButton("Buy");
-		
-	}
 	
 	public Event(String arenaName, String eventName, Date eventDate, Time eventTime, String ageLimit, String eventDescription, int numTickets) {
 		setArenaName(arenaName);
@@ -36,6 +29,12 @@ public class Event extends JPanel{
 		setEventDescription(eventDescription);
 		setNumTickets(numTickets);
 		
+		JPanel leftInfoPanel = new JPanel();
+		JPanel rightInfoPanel = new JPanel();
+		
+		leftInfoPanel.setLayout(new GridLayout(5,1,5,5));
+		rightInfoPanel.setLayout(new FlowLayout());
+		
 		arenaLabel = new JLabel(getArenaName());
 		eventNameLabel = new JLabel(getEventName());
 		eventDateLabel = new JLabel(getEventDate().toString());
@@ -43,6 +42,21 @@ public class Event extends JPanel{
 		ageLimitLabel = new JLabel(getAgeLimit());
 		descriptionLabel = new JLabel(getEventDescription());
 		noOfTicketsLabel = new JLabel(Integer.toString(getNumTickets()));
+		buyButton = new JButton("Buy");
+		
+		leftInfoPanel.add(arenaLabel);
+		leftInfoPanel.add(eventNameLabel);
+		leftInfoPanel.add(eventDateLabel);
+		leftInfoPanel.add(eventTimeLabel);
+		leftInfoPanel.add(ageLimitLabel);
+		
+		rightInfoPanel.add(descriptionLabel);
+		rightInfoPanel.add(noOfTicketsLabel);
+		rightInfoPanel.add(buyButton);
+		
+		setLayout(new GridLayout(2,1,5,5));
+		add(leftInfoPanel);
+		add(rightInfoPanel);
 		
 	}
 

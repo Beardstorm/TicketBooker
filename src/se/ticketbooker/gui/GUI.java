@@ -16,6 +16,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
+import javax.swing.SwingConstants;
 
 
 public class GUI extends JFrame
@@ -28,31 +29,26 @@ public class GUI extends JFrame
 	private JButton loginButton, logoutButton, searchButton, registerButton;
 	private JLabel iconLabel;
 	private JScrollBar searchTabScrollbar;
-	private JPanel headerPanelLoginPanel;
-	private JPanel headerPanelFillPanel;
+	private JPanel headerLoginPanel;
+	private JPanel headerFillPanel;
 	private JLabel lblEmail, lblPassword, lblName, lblPhone; 
 	private JTextField registerEmailTextField;
 	private JTextField registerPasswordTextField;
 	private JTextField registerNameTextField;
 	private JTextField registerPhonenrTextField;
 	private JPanel searchTabPanelContentHeader;
-	private JLabel loggeduserLabel;
 	private JLabel registerMessageLabel;
+	private JPanel headerLoginPanelName;
+	private JPanel headerLoginPanelContent;
+	private JLabel usernameHeaderLabel;
 
 	
 	public GUI()
 	{
 		contentPane = new JPanel();
 		headerPanel = new JPanel();
-		headerPanelFillPanel = new JPanel();
-		headerPanelLoginPanel = new JPanel();
-		loginEmailTextField = new JTextField();
-		loginPasswordTextField = new JPasswordField();
 		logoPanel = new JPanel();
 		iconLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
-		loginButton = new JButton("Login");
-		logoutButton = new JButton("Logout");
-		buttonPanel = new JPanel();
 		tabPanel = new JTabbedPane();
 		searchTabPanel = new JPanel();
 		searchTabPanelContentHeader = new JPanel();
@@ -86,31 +82,49 @@ public class GUI extends JFrame
 		headerPanel.add(logoPanel, BorderLayout.NORTH);
 		logoPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		logoPanel.add(iconLabel);
-				
+		headerFillPanel = new JPanel();
+		headerLoginPanel = new JPanel();
+		buttonPanel = new JPanel();
+		
 		headerPanel.add(buttonPanel);
 		buttonPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		buttonPanel.add(headerPanelFillPanel);
-		buttonPanel.add(headerPanelLoginPanel);
+		buttonPanel.add(headerFillPanel);
+		buttonPanel.add(headerLoginPanel);
+		headerLoginPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		headerPanelLoginPanel.setLayout(new GridLayout(1, 3, 0, 0));
-		headerPanelLoginPanel.add(loginEmailTextField);
+		headerLoginPanelName = new JPanel();
+		headerLoginPanel.add(headerLoginPanelName);
+		
+		usernameHeaderLabel = new JLabel("Logged in as #USERNAME");
+		usernameHeaderLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		usernameHeaderLabel.setVisible(false);
+		headerLoginPanelName.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		headerLoginPanelName.add(usernameHeaderLabel);
+		
+		
+		headerLoginPanelContent = new JPanel();
+		headerLoginPanel.add(headerLoginPanelContent);
+		FlowLayout fl_headerLoginPanelContent = new FlowLayout(FlowLayout.RIGHT, 5, 0);
+		headerLoginPanelContent.setLayout(fl_headerLoginPanelContent);
+		loginEmailTextField = new JTextField();
+		headerLoginPanelContent.add(loginEmailTextField);
 		
 		loginEmailTextField.setText("Email");
 		loginEmailTextField.setColumns(10);
 		loginEmailTextField.addFocusListener(new CustomFocusListener(loginEmailTextField));
-		
-		headerPanelLoginPanel.add(loginPasswordTextField);
+		loginPasswordTextField = new JPasswordField();
+		headerLoginPanelContent.add(loginPasswordTextField);
 		loginPasswordTextField.setText("Password");
 		loginPasswordTextField.setColumns(10);
 		loginPasswordTextField.addFocusListener(new CustomFocusListener(loginPasswordTextField));
-		
-		headerPanelLoginPanel.add(loginButton);
+		loginButton = new JButton("Login");
+		headerLoginPanelContent.add(loginButton);
 		loginButton.setActionCommand("login");
-		
-		headerPanelLoginPanel.add(logoutButton);
+		logoutButton = new JButton("Logout");
+		headerLoginPanelContent.add(logoutButton);
 		logoutButton.setActionCommand("logout");
-		logoutButton.setVisible(false);
+		logoutButton.setEnabled(false);
 		
 		contentPane.add(tabPanel);
 		
@@ -156,6 +170,7 @@ public class GUI extends JFrame
 		
 		registerButton.setBounds(314, 231, 102, 23);
 		registerTabPanel.add(registerButton);
+		registerButton.setActionCommand("register");
 		
 		registerMessageLabel = new JLabel("");
 		registerMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -177,9 +192,6 @@ public class GUI extends JFrame
 		
 		searchTabPanelContentHeader.add(searchButton);
 		searchButton.setActionCommand("search");
-		
-		loggeduserLabel = new JLabel("");
-		searchTabPanelContentHeader.add(loggeduserLabel);
 		
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
@@ -205,26 +217,34 @@ public class GUI extends JFrame
 		return loginEmailTextField;
 	}
 	
-	public JTextField getNameTextFieldRegister(){
+	public JTextField getRegisterNameTextField(){
 		return registerNameTextField;
 	}
 
-	public JTextField getEmailTextFieldRegister(){
+	public JTextField getRegisterEmailTextField(){
 		return registerEmailTextField;
 	}
 	
-	public JTextField getPasswordTextFieldRegister(){
+	public JTextField getRegisterPasswordTextField(){
 		return registerPasswordTextField;
 	}
 	
-	public JTextField getPhonenrTextFieldRegister(){
+	public JTextField getRegisterPhonenrTextField(){
 		return registerPhonenrTextField;
 	}
-	public JLabel getloggedLabel(){
-		return loggeduserLabel;
-		
+	
+	public JPanel getHeaderLoginPanel()
+	{
+		return headerLoginPanel;
 	}
-	public JLabel getRegisterMessage(){
+	
+	public JLabel getUsernameHeaderLabel()
+	{
+		return usernameHeaderLabel;
+	}
+	
+	public JLabel getRegisterMessage()
+	{
 		return registerMessageLabel;
 		
 	}
