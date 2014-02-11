@@ -1,6 +1,5 @@
 package se.ticketbooker.gui;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,20 +15,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.LineBorder;
-import javax.swing.JScrollPane;
-import javax.swing.border.MatteBorder;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.SystemColor;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.SwingConstants;
 
 
-
-
-@SuppressWarnings("serial")
 public class GUI_Test extends JFrame
 {	
 	private JTabbedPane tabPanel;
