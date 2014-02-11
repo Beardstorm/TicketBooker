@@ -109,10 +109,10 @@ public class MainController {
 				
 				int arenaId = Integer.valueOf(gui.getTxtarenaid().getText());
 				String eventname= gui.getTxtEventname().getText();
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date date = formatter.parse(gui.getTxtDate().getText());
-				SimpleDateFormat timeformat = new SimpleDateFormat("hh:mm:ss");
-				Time time= java.sql.Time.valueOf(timeformat.parse(gui.getTxtTime().getText()));
+				SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+				java.sql.Time time=timeformat.parse(gui.getTxtTime().getText());
 				int age =Integer.valueOf(gui.getTxtAgelimit().getText());
 				String des = gui.getTxtDes().getText();
 				int ntickets = Integer.valueOf(gui.getTxtNumtics().getText());
