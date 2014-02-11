@@ -2,6 +2,7 @@ package mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.JOptionPane;
 
@@ -99,6 +100,13 @@ public class MainController {
 				}
 				
 				db.disconnect();
+				break;
+			case "AddEvent":
+				db.connect();
+				int arenaId = Integer.valueOf(gui.getTxtarenaid().getText());
+				String eventname= gui.getTxtEventname().getText();
+				Date date = gui.getTxtDate().getText().; 
+				db.createEvent(arenaId, eventname, date, time, age, des, ntickets, price);
 				break;
 				
 			default:

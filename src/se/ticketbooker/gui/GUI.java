@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 
 public class GUI extends JFrame
@@ -26,7 +27,7 @@ public class GUI extends JFrame
 	private JTextField searchTextField;
 	private JTextField loginEmailTextField;
 	private JTextField loginPasswordTextField;
-	private JButton loginButton, logoutButton, searchButton, registerButton;
+	private JButton loginButton, logoutButton, searchButton, registerButton,addeventButton,clearButton;
 	private JLabel iconLabel;
 	private JScrollBar searchTabScrollbar;
 	private JPanel headerLoginPanel;
@@ -41,6 +42,14 @@ public class GUI extends JFrame
 	private JPanel headerLoginPanelName;
 	private JPanel headerLoginPanelContent;
 	private JLabel usernameHeaderLabel;
+	private JTextField txtarenaid;
+	private JTextField txteventName;
+	private JTextField txtDate;
+	private JTextField txtTime;
+	private JTextField txtAgelimit;
+	private JTextField txtNumTic;
+	private JTextField txtPrice;
+	JTextArea descriptionText;
 
 	
 	public GUI()
@@ -65,7 +74,9 @@ public class GUI extends JFrame
 		registerNameTextField = new JTextField();
 		searchTextField = new JTextField();
 		searchTabPanelContent = new JPanel();
-		addeventTabPanel = new JPanel();
+		addeventButton = new JButton("Add Event");
+		clearButton = new JButton("Clear Text");
+		descriptionText = new JTextArea();
 		
 		createAndShowGUI();
 	}
@@ -134,7 +145,6 @@ public class GUI extends JFrame
 		
 		tabPanel.addTab("Search", searchTabPanel);
 		tabPanel.addTab("Register", registerTabPanel);
-		tabPanel.addTab("Add Event",addeventTabPanel);
 		registerTabPanel.setLayout(null);
 		
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -192,6 +202,96 @@ public class GUI extends JFrame
 		
 		searchTabPanelContentHeader.add(searchButton);
 		searchButton.setActionCommand("search");
+		addeventTabPanel = new JPanel();
+		addeventTabPanel.setLayout(null);
+		
+		JLabel eventidLabel = new JLabel("ArenaID");
+		eventidLabel.setBounds(48, 26, 132, 26);
+		addeventTabPanel.add(eventidLabel);
+		
+		JLabel eventnameLabel = new JLabel("Event Name");
+		eventnameLabel.setBounds(48, 74, 132, 26);
+		addeventTabPanel.add(eventnameLabel);
+		
+		JLabel dateLabel = new JLabel("Date");
+		dateLabel.setBounds(48, 120, 132, 26);
+		addeventTabPanel.add(dateLabel);
+		
+		JLabel timeLabel = new JLabel("Time");
+		timeLabel.setBounds(48, 164, 132, 26);
+		addeventTabPanel.add(timeLabel);
+		
+		JLabel agelimitLabel = new JLabel("Age Limit");
+		agelimitLabel.setBounds(48, 210, 132, 26);
+		addeventTabPanel.add(agelimitLabel);
+		
+		JLabel desLabel = new JLabel("Description");
+		desLabel.setBounds(474, 75, 133, 24);
+		addeventTabPanel.add(desLabel);
+		
+		JLabel numticketLabel = new JLabel("Number of Tickets");
+		numticketLabel.setBounds(48, 247, 132, 26);
+		addeventTabPanel.add(numticketLabel);
+		
+		JLabel priceLabel = new JLabel("Price");
+		priceLabel.setBounds(48, 287, 132, 26);
+		addeventTabPanel.add(priceLabel);
+		tabPanel.addTab("Add Event",addeventTabPanel);
+		
+		txtarenaid = new JTextField();
+		txtarenaid.setBounds(232, 29, 184, 20);
+		addeventTabPanel.add(txtarenaid);
+		txtarenaid.setColumns(10);
+		
+		txteventName = new JTextField();
+		txteventName.setText("");
+		txteventName.setBounds(232, 77, 184, 20);
+		addeventTabPanel.add(txteventName);
+		txteventName.setColumns(10);
+		
+		txtDate = new JTextField();
+		txtDate.setText("");
+		txtDate.setBounds(232, 123, 184, 20);
+		addeventTabPanel.add(txtDate);
+		txtDate.setColumns(10);
+		
+		txtTime = new JTextField();
+		txtTime.setText("");
+		txtTime.setBounds(232, 167, 184, 20);
+		addeventTabPanel.add(txtTime);
+		txtTime.setColumns(10);
+		
+		txtAgelimit = new JTextField();
+		txtAgelimit.setText("");
+		txtAgelimit.setBounds(232, 209, 184, 20);
+		addeventTabPanel.add(txtAgelimit);
+		txtAgelimit.setColumns(10);
+		
+		txtNumTic = new JTextField();
+		txtNumTic.setText("");
+		txtNumTic.setBounds(232, 247, 184, 20);
+		addeventTabPanel.add(txtNumTic);
+		txtNumTic.setColumns(10);
+		
+		txtPrice = new JTextField();
+		txtPrice.setText("");
+		txtPrice.setBounds(232, 289, 184, 20);
+		addeventTabPanel.add(txtPrice);
+		txtPrice.setColumns(10);
+		
+		
+		addeventButton.setBounds(157, 342, 132, 23);
+		addeventTabPanel.add(addeventButton);
+		addeventButton.setActionCommand("AddEvent");
+		
+		
+		clearButton.setBounds(440, 342, 137, 23);
+		addeventTabPanel.add(clearButton);
+		clearButton.setActionCommand("clearText");
+		
+		
+		descriptionText.setBounds(478, 120, 229, 116);
+		addeventTabPanel.add(descriptionText);
 		
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
@@ -207,6 +307,8 @@ public class GUI extends JFrame
 		loginButton.addActionListener(listener);
 		logoutButton.addActionListener(listener);
 		registerButton.addActionListener(listener);
+		addeventButton.addActionListener(listener);
+		clearButton.addActionListener(listener);
 	}
 	
 	public JTextField getPasswordField(){
@@ -257,9 +359,42 @@ public class GUI extends JFrame
 		return logoutButton;
 		
 	}
-	
 	public JButton getLoginButton(){
 		return loginButton;
 		
 	}
+	
+	public JTextField getTxtarenaid(){
+		return txtarenaid;
+		
+	}
+	public JTextField getTxtEventname(){
+		return txteventName;
+		
+	}
+	public JTextField getTxtDate(){
+		return txtDate;
+		
+	}
+	public JTextField getTxtTime(){
+		return txtTime;
+		
+	}
+	public JTextField getTxtAgelimit(){
+		return txtAgelimit;
+		
+	}
+	public JTextArea getTxtDes(){
+		return descriptionText;
+		
+	}
+	public JTextField getTxtNumtics(){
+		return txtNumTic;
+		
+	}
+	public JTextField getTxtPrice(){
+		return txtPrice;
+		
+	}
+	
 }
