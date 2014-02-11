@@ -23,18 +23,18 @@ public class GUI extends JFrame
 	private JTabbedPane tabPanel;
 	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel;
 	private JTextField searchTextField;
-	private JTextField emailTextFieldLogin;
-	private JTextField passwordTextFieldLogin;
+	private JTextField loginEmailTextField;
+	private JTextField loginPasswordTextField;
 	private JButton loginButton, searchButton, registerButton;
 	private JLabel iconLabel;
 	private JScrollBar searchTabScrollbar;
 	private JPanel headerPanelLoginPanel;
 	private JPanel headerPanelFillPanel;
-	private JLabel lblemail, lblpassword, lblname, lblphone; 
-	private JTextField emailTextFieldRegister;
-	private JTextField passwordTextFieldRegister;
-	private JTextField nameTextFieldRegister;
-	private JTextField phonenrTextFieldRegister;
+	private JLabel lblEmail, lblPassword, lblName, lblPhone; 
+	private JTextField registerEmailTextField;
+	private JTextField registerPasswordTextField;
+	private JTextField registerNameTextField;
+	private JTextField registerPhonenrTextField;
 	private JPanel searchTabPanelContentHeader;
 	private JLabel loggeduserLabel;
 	private JLabel registerMessageLabel;
@@ -46,8 +46,8 @@ public class GUI extends JFrame
 		headerPanel = new JPanel();
 		headerPanelFillPanel = new JPanel();
 		headerPanelLoginPanel = new JPanel();
-		emailTextFieldLogin = new JTextField();
-		passwordTextFieldLogin = new JPasswordField();
+		loginEmailTextField = new JTextField();
+		loginPasswordTextField = new JPasswordField();
 		logoPanel = new JPanel();
 		iconLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
 		loginButton = new JButton("Login");
@@ -58,14 +58,14 @@ public class GUI extends JFrame
 		searchButton = new JButton("Search");
 		registerTabPanel = new JPanel();
 		registerButton = new JButton("Register");
-		lblname = new JLabel("Full Name *");
-		lblemail = new JLabel("E-mail *");
-		lblpassword = new JLabel("Password *");
-		lblphone = new JLabel("Phone No *");
-		passwordTextFieldRegister = new JPasswordField();
-		emailTextFieldRegister = new JTextField();
-		phonenrTextFieldRegister = new JTextField();
-		nameTextFieldRegister = new JTextField();
+		lblName = new JLabel("Full Name *");
+		lblEmail = new JLabel("E-mail *");
+		lblPassword = new JLabel("Password *");
+		lblPhone = new JLabel("Phone No *");
+		registerPasswordTextField = new JPasswordField();
+		registerEmailTextField = new JTextField();
+		registerPhonenrTextField = new JTextField();
+		registerNameTextField = new JTextField();
 		searchTextField = new JTextField();
 		searchTabPanelContent = new JPanel();
 		
@@ -92,16 +92,16 @@ public class GUI extends JFrame
 		buttonPanel.add(headerPanelLoginPanel);
 		
 		headerPanelLoginPanel.setLayout(new GridLayout(1, 3, 0, 0));
-		headerPanelLoginPanel.add(emailTextFieldLogin);
+		headerPanelLoginPanel.add(loginEmailTextField);
 		
-		emailTextFieldLogin.setText("Email");
-		emailTextFieldLogin.setColumns(10);
-		emailTextFieldLogin.addFocusListener(new CustomFocusListener(emailTextFieldLogin));
+		loginEmailTextField.setText("Email");
+		loginEmailTextField.setColumns(10);
+		loginEmailTextField.addFocusListener(new CustomFocusListener(loginEmailTextField));
 		
-		headerPanelLoginPanel.add(passwordTextFieldLogin);
-		passwordTextFieldLogin.setText("Password");
-		passwordTextFieldLogin.setColumns(10);
-		passwordTextFieldLogin.addFocusListener(new CustomFocusListener(passwordTextFieldLogin));
+		headerPanelLoginPanel.add(loginPasswordTextField);
+		loginPasswordTextField.setText("Password");
+		loginPasswordTextField.setColumns(10);
+		loginPasswordTextField.addFocusListener(new CustomFocusListener(loginPasswordTextField));
 		
 		headerPanelLoginPanel.add(loginButton);
 		loginButton.setActionCommand("login");
@@ -116,36 +116,36 @@ public class GUI extends JFrame
 		tabPanel.addTab("Register", registerTabPanel);
 		registerTabPanel.setLayout(null);
 		
-		lblemail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblemail.setBounds(107, 80, 82, 14);
-		registerTabPanel.add(lblemail);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEmail.setBounds(107, 80, 82, 14);
+		registerTabPanel.add(lblEmail);
 		
-		lblname.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblname.setBounds(107, 37, 82, 14);
-		registerTabPanel.add(lblname);
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblName.setBounds(107, 37, 82, 14);
+		registerTabPanel.add(lblName);
 		
-		lblpassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblpassword.setBounds(107, 122, 82, 14);
-		registerTabPanel.add(lblpassword);
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPassword.setBounds(107, 122, 82, 14);
+		registerTabPanel.add(lblPassword);
 		
-		lblphone.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblphone.setBounds(107, 164, 82, 14);
-		registerTabPanel.add(lblphone);
+		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPhone.setBounds(107, 164, 82, 14);
+		registerTabPanel.add(lblPhone);
 		
-		nameTextFieldRegister.setBounds(221, 35, 165, 20);
-		registerTabPanel.add(nameTextFieldRegister);
-		nameTextFieldRegister.setColumns(18);
+		registerNameTextField.setBounds(221, 35, 165, 20);
+		registerTabPanel.add(registerNameTextField);
+		registerNameTextField.setColumns(18);
 		
-		emailTextFieldRegister.setBounds(221, 78, 165, 20);
-		registerTabPanel.add(emailTextFieldRegister);
-		emailTextFieldRegister.setColumns(18);
+		registerEmailTextField.setBounds(221, 78, 165, 20);
+		registerTabPanel.add(registerEmailTextField);
+		registerEmailTextField.setColumns(18);
 		
-		passwordTextFieldRegister.setBounds(221, 120, 165, 20);
-		registerTabPanel.add(passwordTextFieldRegister);
+		registerPasswordTextField.setBounds(221, 120, 165, 20);
+		registerTabPanel.add(registerPasswordTextField);
 		
-		phonenrTextFieldRegister.setBounds(221, 158, 165, 20);
-		registerTabPanel.add(phonenrTextFieldRegister);
-		phonenrTextFieldRegister.setColumns(18);
+		registerPhonenrTextField.setBounds(221, 158, 165, 20);
+		registerTabPanel.add(registerPhonenrTextField);
+		registerPhonenrTextField.setColumns(18);
 		
 		registerButton.setBounds(314, 231, 102, 23);
 		registerTabPanel.add(registerButton);
@@ -190,27 +190,27 @@ public class GUI extends JFrame
 	}
 	
 	public JTextField getPasswordField(){
-		return passwordTextFieldLogin;
+		return loginPasswordTextField;
 	}
 	
 	public JTextField getUsernameField(){
-		return emailTextFieldLogin;
+		return loginEmailTextField;
 	}
 	
 	public JTextField getNameTextFieldRegister(){
-		return nameTextFieldRegister;
+		return registerNameTextField;
 	}
 
 	public JTextField getEmailTextFieldRegister(){
-		return emailTextFieldRegister;
+		return registerEmailTextField;
 	}
 	
 	public JTextField getPasswordTextFieldRegister(){
-		return passwordTextFieldRegister;
+		return registerPasswordTextField;
 	}
 	
 	public JTextField getPhonenrTextFieldRegister(){
-		return phonenrTextFieldRegister;
+		return registerPhonenrTextField;
 	}
 	public JLabel getloggedLabel(){
 		return loggeduserLabel;
