@@ -63,9 +63,16 @@ public class MainController {
 
 
 			}
+				gui.getLoginButton().setVisible(false);
+				gui.getLogoutButton().setVisible(true);
 
 				db.disconnect();
 				
+				break;
+			case "logout":
+				db.logout();
+				gui.getLoginButton().setVisible(true);
+				gui.getLogoutButton().setVisible(false);
 				break;
 			case "Register":
 				db.connect();

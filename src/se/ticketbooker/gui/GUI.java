@@ -25,7 +25,7 @@ public class GUI extends JFrame
 	private JTextField searchTextField;
 	private JTextField loginEmailTextField;
 	private JTextField loginPasswordTextField;
-	private JButton loginButton, searchButton, registerButton;
+	private JButton loginButton, logoutButton, searchButton, registerButton;
 	private JLabel iconLabel;
 	private JScrollBar searchTabScrollbar;
 	private JPanel headerPanelLoginPanel;
@@ -51,6 +51,7 @@ public class GUI extends JFrame
 		logoPanel = new JPanel();
 		iconLabel = new JLabel(new ImageIcon("resources\\ticnet.png"));
 		loginButton = new JButton("Login");
+		logoutButton = new JButton("Logout");
 		buttonPanel = new JPanel();
 		tabPanel = new JTabbedPane();
 		searchTabPanel = new JPanel();
@@ -105,6 +106,10 @@ public class GUI extends JFrame
 		
 		headerPanelLoginPanel.add(loginButton);
 		loginButton.setActionCommand("login");
+		
+		headerPanelLoginPanel.add(logoutButton);
+		logoutButton.setActionCommand("logout");
+		logoutButton.setVisible(false);
 		
 		contentPane.add(tabPanel);
 		
@@ -186,6 +191,7 @@ public class GUI extends JFrame
 	public void addButtonListener(ActionListener listener) {
 		searchButton.addActionListener(listener);
 		loginButton.addActionListener(listener);
+		logoutButton.addActionListener(listener);
 		registerButton.addActionListener(listener);
 	}
 	
@@ -222,6 +228,16 @@ public class GUI extends JFrame
 	}
 	public JButton getRegisterButton(){
 		return registerButton;
+		
+	}
+	
+	public JButton getLogoutButton(){
+		return logoutButton;
+		
+	}
+	
+	public JButton getLoginButton(){
+		return loginButton;
 		
 	}
 }
