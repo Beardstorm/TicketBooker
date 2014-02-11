@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
@@ -85,6 +86,7 @@ public class MainController {
 				gui.getUsernameHeaderLabel().setVisible(false);
 				gui.getUsernameHeaderLabel().setText("");
 				
+				db.disconnect();
 				break;
 				
 			case "register":
@@ -108,10 +110,9 @@ public class MainController {
 				
 				int arenaId = Integer.valueOf(gui.getTxtarenaid().getText());
 				String eventname= gui.getTxtEventname().getText();
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-				java.util.Date date = formatter.parse(gui.getTxtDate().getText());
-				SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
-				java.sql.Time time=timeformat.parse(gui.getTxtTime().getText());
+				String date = gui.getTxtDate().getText();
+				String time = gui.getTxtTime().getText();
+
 				int age =Integer.valueOf(gui.getTxtAgelimit().getText());
 				String des = gui.getTxtDes().getText();
 				int ntickets = Integer.valueOf(gui.getTxtNumtics().getText());

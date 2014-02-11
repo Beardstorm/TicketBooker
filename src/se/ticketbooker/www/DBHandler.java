@@ -33,6 +33,7 @@ public class DBHandler{
 			System.out.println("Connection Succesfull!");
 		} catch (SQLException e) {
 			System.err.println("Error: failed to connect" + e.getMessage());
+			e.printStackTrace();
 			return;
 		}
 
@@ -117,6 +118,8 @@ public class DBHandler{
 				System.err.println("Error: Could not close Connection " + e.getMessage());
 			}
 		}
+		
+		ds = null;
 	}
 
 
@@ -136,13 +139,16 @@ public class DBHandler{
 		//make a ticket
 	}
 	
-	public void createEvent(int arenaId,String eventname,java.util.Date date,Time time,int age,String des,int ntickets,int price){
+	public void createEvent(int arenaId,String eventname,String date,String time,int age,String des,int ntickets,int price){
 		//create a new event
 		try {
-			statement.executeQuery("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date='"+date+"',time='"+time+
-					"',age_limit ='"+age+"',description = '"+des+"',num_tickets= '"+ntickets+"',price='"+price+"'");
+//			statement.executeUpdate("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date=STR_TO_DATE('"+date+")',time='"+time+
+//					"',age_limit ='"+age+"',description = '"+des+"',num_tickets= '"+ntickets+"',price='"+price+"'");
+			
+			statement.executeUpdate("INSERT INTO `event` (`arena_id`,`name`,`date`,`time`,`age_limit`,`description`,`num_tickets`,`price`) VALUES ('"+arenaId+"','"+eventname+"','"+date+"','"+time+"','"+age+"','"+des+"','"+ntickets+"','"+price+"')");
 		} catch (SQLException e) {
-			System.err.println("quary error" + e.getMessage());
+			System.err.println("quary error");
+			e.printStackTrace();
 		}
 	}
 	
