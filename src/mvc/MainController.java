@@ -3,6 +3,9 @@ package mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
@@ -103,10 +106,20 @@ public class MainController {
 				break;
 			case "AddEvent":
 				db.connect();
+				
 				int arenaId = Integer.valueOf(gui.getTxtarenaid().getText());
 				String eventname= gui.getTxtEventname().getText();
-				Date date = gui.getTxtDate().getText().; 
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+				java.util.Date date = formatter.parse(gui.getTxtDate().getText());
+				SimpleDateFormat timeformat = new SimpleDateFormat("hh:mm:ss");
+				Time time= java.sql.Time.valueOf(timeformat.parse(gui.getTxtTime().getText()));
+				int age =Integer.valueOf(gui.getTxtAgelimit().getText());
+				String des = gui.getTxtDes().getText();
+				int ntickets = Integer.valueOf(gui.getTxtNumtics().getText());
+				int price = Integer.valueOf(gui.getTxtPrice().getText());
+				
 				db.createEvent(arenaId, eventname, date, time, age, des, ntickets, price);
+				db.disconnect();
 				break;
 				
 			default:

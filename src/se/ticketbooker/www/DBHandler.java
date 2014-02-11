@@ -136,7 +136,7 @@ public class DBHandler{
 		//make a ticket
 	}
 	
-	public void createEvent(int arenaId,String eventname,Date date,Time time,int age,String des,int ntickets,int price){
+	public void createEvent(int arenaId,String eventname,java.util.Date date,Time time,int age,String des,int ntickets,int price){
 		//create a new event
 		try {
 			statement.executeQuery("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date='"+date+"',time='"+time+
