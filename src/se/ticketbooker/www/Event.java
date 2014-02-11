@@ -1,5 +1,7 @@
 package se.ticketbooker.www;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.Date;
@@ -8,7 +10,9 @@ import java.sql.Time;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
+@SuppressWarnings("serial")
 public class Event extends JPanel{
 	private String arenaName;
 	private String eventName;
@@ -54,9 +58,13 @@ public class Event extends JPanel{
 		rightInfoPanel.add(noOfTicketsLabel);
 		rightInfoPanel.add(buyButton);
 		
-		setLayout(new GridLayout(2,1,5,5));
-		add(leftInfoPanel);
-		add(rightInfoPanel);
+		this.setLayout(new GridLayout(2,1,5,5));
+		this.add(leftInfoPanel);
+		this.add(rightInfoPanel);
+		
+		this.setPreferredSize(new Dimension(200,200));
+		this.setBackground(Color.white);
+		this.setBorder(new LineBorder(Color.gray, 2));
 		
 	}
 
