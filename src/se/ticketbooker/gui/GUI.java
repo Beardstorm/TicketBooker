@@ -21,7 +21,7 @@ import java.awt.SystemColor;
 public class GUI extends JFrame
 {	
 	private JTabbedPane tabPanel;
-	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel;
+	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel,addeventTabPanel;
 	private JTextField searchTextField;
 	private JTextField loginEmailTextField;
 	private JTextField loginPasswordTextField;
@@ -69,6 +69,7 @@ public class GUI extends JFrame
 		registerNameTextField = new JTextField();
 		searchTextField = new JTextField();
 		searchTabPanelContent = new JPanel();
+		addeventTabPanel = new JPanel();
 		
 		createAndShowGUI();
 	}
@@ -119,6 +120,7 @@ public class GUI extends JFrame
 		
 		tabPanel.addTab("Search", searchTabPanel);
 		tabPanel.addTab("Register", registerTabPanel);
+		tabPanel.addTab("Add Event",addeventTabPanel);
 		registerTabPanel.setLayout(null);
 		
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));

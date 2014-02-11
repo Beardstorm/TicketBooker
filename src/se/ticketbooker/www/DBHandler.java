@@ -1,9 +1,11 @@
 package se.ticketbooker.www;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 
 import se.ticketbooker.www.User;
 
@@ -51,9 +53,9 @@ public class DBHandler{
 
 	public void search(String input){
 		try {
-			//			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
-			//					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
-			statement.executeUpdate("INSERT INTO ticket(event_id, price, customer_id) VALUES('1', '100', '1')");
+				result = statement.executeQuery("SELECT name, date, time, age_limit, description"
+							+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,7 +136,13 @@ public class DBHandler{
 		//make a ticket
 	}
 	
-	public void createEvent(){
+	public void createEvent(int arenaId,String eventname,Date date,Time time,int age,String des,int ntickets,int price){
 		//create a new event
+		try {
+			statement.executeQuery("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date='"+date+"',time='"+time+
+					"',age_limit ='"+age+"',description = '"+des+"',num_tickets= '"+ntickets+"',price='"+price+"'");
+		} catch (SQLException e) {
+			System.err.println("quary error" + e.getMessage());
+		}
 	}
 }
