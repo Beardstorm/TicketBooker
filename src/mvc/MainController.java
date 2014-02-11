@@ -38,24 +38,19 @@ public class MainController {
 				break;
 			case "login":
 				db.connect();
-				User member = new User();
 				try {
-					member = db.getUserbymail(gui.getUsernameField().getText(),gui.getPasswordField().getText());
+					db.login(gui.getUsernameField().getText(),gui.getPasswordField().getText());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				String mail = member.getEmail();
-				String pass = member.getPassword();
+
 				String loginName = gui.getUsernameField().getText();
 				String loginPass = gui.getPasswordField().getText();
-				String role = member.getRole();
-				String uname =member.getName();
 				
-				db.login(gui.getUsernameField().getText(), gui.getPasswordField().getText());
-				if(loginName.equals(mail) && loginPass.equals(pass)){
+				if(loginName.equals(User.getInstance().getEmail()) && loginPass.equals(User.getInstance().getPassword())){
 					gui.getloggedLabel().setVisible(true);
-					gui.getloggedLabel().setText(uname +" " + "is logged in");
+					gui.getloggedLabel().setText(User.getInstance().getName() +" " + "is logged in");
 					System.out.println("member logged in");
 					//.....
 									
@@ -74,20 +69,17 @@ public class MainController {
 				break;
 			case "Register":
 				db.connect();
-				User newuser = new User();
-				newuser.setName(gui.getNameTextFieldRegister().getText());
-				newuser.setEmail(gui.getEmailTextFieldRegister().getText());
-				newuser.setPhone(gui.getPhonenrTextFieldRegister().getText());
-				newuser.setPassword(gui.getPasswordTextFieldRegister().getText());
 				
-				String name = newuser.getName();
-				String email = newuser.getEmail();
-				String password = newuser.getPassword();
-				String phone = newuser.getPhone();
+				db.registerUser(gui.getNameTextFieldRegister().getText(), gui.getPasswordTextFieldRegister().getText(),
+							gui.getEmailTextFieldRegister().getText(), gui.getPhonenrTextFieldRegister().getText());
 				
-				db.registerUser(name, password, email, phone);
 				gui.getRegisterButton().setEnabled(false);
 				gui.getRegisterMessage().setText("Registration is successful");
+				try {
+					db.login(gui.getEmailTextFieldRegister().getText(), gui.getPasswordTextFieldRegister().getText());
+				} catch (Exception e1) {
+					System.err.println("Failed to login in register method" + e1.getMessage());
+				}
 				db.disconnect();
 				break;
 			default:

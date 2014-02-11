@@ -48,17 +48,49 @@ public class DBHandler{
 
 
 
-	public void login(String username, String password){
 
+	public void search(String input){
 		try {
-			result = statement.executeQuery("SELECT * FROM account WHERE email='" + username + "' AND password='" + password + "'");
+			//			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
+			//					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
+			statement.executeUpdate("INSERT INTO ticket(event_id, price, customer_id) VALUES('1', '100', '1')");
 		} catch (SQLException e) {
-			System.err.println("Error: could not retrieve a result " + e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+
+	public void login(String mail, String password) throws Exception {
+		try {
+
+			result = statement.executeQuery("SELECT * FROM account where email = '"+ mail+ "'AND password ='"+password+"'");
+
+			result.first();
+			User.getInstance().setName(result.getString("name"));
+			User.getInstance().setPassword(result.getString("password"));
+			User.getInstance().setPhone(result.getString("phone"));
+			User.getInstance().setEmail( result.getString("email"));
+			User.getInstance().setRole(result.getString("role"));
+
+		} catch (Exception e) {
+			throw e;
+
+		} finally {
 
 		}
 
 	}
 
+	public void logout(){
+		User.getInstance().setEmail(null);
+		User.getInstance().setName(null);
+		User.getInstance().setPassword(null);
+		User.getInstance().setPhone(null);
+		User.getInstance().setRole("guest");
+	}
+	
 
 	//Closes all resources
 	public void disconnect(){
@@ -83,47 +115,6 @@ public class DBHandler{
 				System.err.println("Error: Could not close Connection " + e.getMessage());
 			}
 		}
-	}
-
-
-
-	public void search(String input){
-		try {
-			//			result = statement.executeQuery("SELECT name, date, time, age_limit, description"
-			//					+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
-			statement.executeUpdate("INSERT INTO ticket(event_id, price, customer_id) VALUES('1', '100', '1')");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-
-
-	public User getUserbymail(String mail, String password) throws Exception {
-		try {
-
-			result = statement.executeQuery("SELECT * FROM account where email = '"+ mail+ "'AND password ='"+password+"'");
-			User member = new User();
-
-			while (result.next()) {
-
-				member.setName(result.getString("name"));
-				member.setPassword(result.getString("password"));
-				member.setPhone(result.getString("phone"));
-				member.setEmail( result.getString("email"));
-				member.setRole(result.getString("role"));
-
-			} 
-			return member; 
-
-		} catch (Exception e) {
-			throw e;
-
-		} finally {
-
-		}
-
 	}
 
 
