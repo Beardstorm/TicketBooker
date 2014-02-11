@@ -27,7 +27,7 @@ public class DBHandler{
 
 		//try to establish a connection
 		try {
-			connection = ds.getConnection("guest", null);
+			connection = ds.getConnection(User.getInstance().getRole(), null);
 			System.out.println("Connection Succesfull!");
 		} catch (SQLException e) {
 			System.err.println("Error: failed to connect" + e.getMessage());
@@ -128,5 +128,13 @@ public class DBHandler{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void createTicket(){
+		//make a ticket
+	}
+	
+	public void createEvent(){
+		//create a new event
 	}
 }
