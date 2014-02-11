@@ -145,4 +145,13 @@ public class DBHandler{
 			System.err.println("quary error" + e.getMessage());
 		}
 	}
+	
+	public ResultSet getEvents(){
+		try {
+			result = statement.executeQuery("SELECT * FROM arena INNER JOIN event WHERE arena.arena_id=event.arena_id");
+		} catch (SQLException e) {
+			System.err.println("could not get resultset from method getEvents " + e.getMessage());
+		}
+		return result;
+	}
 }
