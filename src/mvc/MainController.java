@@ -5,17 +5,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import se.ticketbooker.gui.GUI_Test;
+import se.ticketbooker.gui.GUI;
 import se.ticketbooker.www.DBHandler;
 import se.ticketbooker.www.User;
 
 public class MainController {
-	private GUI_Test gui;
+	private GUI gui;
 	private DBHandler db;
 	
 	// ROW ADDED FOR GITHUB TEST
 
-	public MainController(GUI_Test gui, DBHandler db){
+	public MainController(GUI gui, DBHandler db){
 		this.gui = gui;
 		this.db = db;
 		
@@ -106,7 +106,7 @@ public class MainController {
 
 			@Override
 			public void run() {
-				new MainController(new GUI_Test(), new DBHandler());
+				new MainController(new GUI(), new DBHandler());
 			}
 
 		});

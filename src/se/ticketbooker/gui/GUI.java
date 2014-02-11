@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 
 
-public class GUI_Test extends JFrame
+public class GUI extends JFrame
 {	
 	private JTabbedPane tabPanel;
 	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel;
@@ -40,7 +40,7 @@ public class GUI_Test extends JFrame
 	private JLabel registerMessageLabel;
 
 	
-	public GUI_Test()
+	public GUI()
 	{
 		contentPane = new JPanel();
 		headerPanel = new JPanel();
