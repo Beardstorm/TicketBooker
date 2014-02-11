@@ -82,7 +82,6 @@ public class MainController {
 				gui.getUsernameField().setEnabled(true);
 				gui.getPasswordField().setEnabled(true);
 				gui.getLogoutButton().setEnabled(false);
-				
 				gui.getUsernameHeaderLabel().setVisible(false);
 				gui.getUsernameHeaderLabel().setText("");
 				
