@@ -3,7 +3,10 @@ package se.ticketbooker.www;
 import java.sql.Date;
 import java.sql.Time;
 
-public class Event {
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class Event extends JPanel{
 	private String arenaName;
 	private String eventName;
 	private Date eventDate;
@@ -11,8 +14,11 @@ public class Event {
 	private String ageLimit;
 	private String eventDescription;
 	private int numTickets;
+	private JButton book;
 	
 	public Event() {
+		this.setLayout(mgr);
+		book = new JButton("Buy");
 		
 	}
 	
