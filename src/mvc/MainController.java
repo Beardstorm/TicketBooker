@@ -96,9 +96,10 @@ public class MainController {
 							gui.getRegisterEmailTextField().getText(), gui.getRegisterPhonenrTextField().getText());
 				
 				gui.getRegisterButton().setEnabled(false);
-				gui.getRegisterMessage().setText("Registration is successful");
+				
 				try {
 					db.login(gui.getRegisterEmailTextField().getText(), gui.getRegisterPasswordTextField().getText());
+					gui.getRegisterMessage().setText("Registration is successful \n You're logged in");
 				} catch (Exception e1) {
 					System.err.println("Failed to login in register method" + e1.getMessage());
 				}
