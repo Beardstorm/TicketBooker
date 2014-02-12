@@ -36,9 +36,12 @@ public class MainController {
 			
 			switch(action){
 			case "search":
-				System.out.println("search");
-
-				//do stuff
+				db.connect();
+				/*
+				 * 1. retrive a Resultset from DBhandler
+				 * 2. generate an ArrayList of Events
+				 * 3. send to GUI
+				 */
 				
 				db.disconnect();
 				break;
