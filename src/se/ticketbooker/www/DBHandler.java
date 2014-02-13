@@ -1,12 +1,10 @@
 package se.ticketbooker.www;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 
 import se.ticketbooker.www.User;
 
@@ -52,24 +50,6 @@ public class DBHandler{
 
 
 
-
-	public ResultSet search(String input){
-		try {
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * "
-							+ "FROM view_AllEvents WHERE event_name LIKE '% ? %'");
-				preparedStatement.setString(1, input);
-				result = preparedStatement.executeQuery();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-
-
-
 	public void login(String mail, String password) throws Exception {
 		try {
 
@@ -98,7 +78,7 @@ public class DBHandler{
 		User.getInstance().setPhone(null);
 		User.getInstance().setRole("guest");
 	}
-	
+
 
 	//Closes all resources
 	public void disconnect(){
@@ -123,7 +103,7 @@ public class DBHandler{
 				System.err.println("Error: Could not close Connection " + e.getMessage());
 			}
 		}
-		
+
 		ds = null;
 	}
 
@@ -136,24 +116,19 @@ public class DBHandler{
 			preparedStatement.setString(3, mail);
 			preparedStatement.setString(4, password);
 			preparedStatement.executeUpdate();
-//			statement.executeUpdate("INSERT INTO ticnet.account SET Name='"+name+
-//					"',phone='"+phone+"',email='"+mail+"',password='"+password+"', role='member'");
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void createTicket(){
 		//make a ticket
 	}
-	
+
 	public void createEvent(int arenaId,String eventname,String date,String time,int age,String des,int ntickets,int price){
 		//create a new event
 		try {
-//			statement.executeUpdate("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date=STR_TO_DATE('"+date+")',time='"+time+
-//					"',age_limit ='"+age+"',description = '"+des+"',num_tickets= '"+ntickets+"',price='"+price+"'");
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `event` (`arena_id`,`name`,`date`,`time`,`age_limit`,`description`,`num_tickets`,`price`) VALUES (?,?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, arenaId);
 			preparedStatement.setString(2, eventname);
@@ -164,21 +139,35 @@ public class DBHandler{
 			preparedStatement.setInt(7, ntickets);
 			preparedStatement.setInt(8, price);
 			preparedStatement.executeUpdate();
-//			statement.executeUpdate("INSERT INTO `event` (`arena_id`,`name`,`date`,`time`,`age_limit`,`description`,`num_tickets`,`price`) VALUES ('"+arenaId+"','"+eventname+"','"+date+"','"+time+"','"+age+"','"+des+"','"+ntickets+"','"+price+"')");
+			
 		} catch (SQLException e) {
 			System.err.println("Error: Could not create a new event " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ResultSet getAllEvents(){
-		try {//arena.name, event.name, event.date, event.time, event.age_limit, event.description, event.tickets
+		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM view_AllEvents");
 			result = preparedStatement.executeQuery();
-//			result = statement.executeQuery("SELECT * FROM arena INNER JOIN event WHERE arena.arena_id=event.arena_id");
+			
 		} catch (SQLException e) {
 			System.err.println("could not get resultset from method getEvents " + e.getMessage());
 		}
+		return result;
+	}
+
+	public ResultSet search(String input){
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT * FROM view_AllEvents "
+					+ "WHERE event_name LIKE ?");
+			preparedStatement.setString(1, "%" + input + "%");
+			result = preparedStatement.executeQuery();
+
+		} catch (SQLException e) {
+			System.err.println("Error: Search method failed " + e.getMessage());
+		}
+
 		return result;
 	}
 }

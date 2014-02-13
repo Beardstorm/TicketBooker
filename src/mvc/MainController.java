@@ -37,8 +37,12 @@ public class MainController {
 			switch(action){
 			case "search":
 				db.connect();
+				
+				if(!eventList.isEmpty())
+					eventList.clear();
 
 				String searchText = gui.getSearchFieldText();
+				System.out.println(searchText);
 				if(searchText.equals("Search") || searchText.equals("")){
 					ResultSet result = db.getAllEvents();
 					try {
@@ -53,7 +57,6 @@ public class MainController {
 					}
 
 					gui.addEventsToGui(eventList);
-
 			}
 			else {
 				
