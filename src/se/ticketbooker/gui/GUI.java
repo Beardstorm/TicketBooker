@@ -375,7 +375,9 @@ public class GUI extends JFrame
 		searchTabPanelContentBody.repaint();
 	}
 
-	
+	public String getSearchFieldText(){
+		return searchTextField.getText();
+	}
 	//--Getters and Setters --//
 	public JTextField getPasswordField(){
 		return loginPasswordTextField;

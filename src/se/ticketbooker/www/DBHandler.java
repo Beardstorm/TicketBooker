@@ -53,19 +53,19 @@ public class DBHandler{
 
 
 
-	public void search(String input){
+	public ResultSet search(String input){
 		try {
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT name, date, time, age_limit, description"
-							+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city = ?)");
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * "
+							+ "FROM view_AllEvents WHERE event_name LIKE '% ? %'");
 				preparedStatement.setString(1, input);
 				result = preparedStatement.executeQuery();
-//				result = statement.executeQuery("SELECT name, date, time, age_limit, description"
-//							+ "FROM event WHERE arena_id IN(SELECT arena_id FROM arena WHERE city =" + input + ")");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 
 
@@ -171,9 +171,9 @@ public class DBHandler{
 		}
 	}
 	
-	public ResultSet getEvents(){
+	public ResultSet getAllEvents(){
 		try {//arena.name, event.name, event.date, event.time, event.age_limit, event.description, event.tickets
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT arena.name, event.name, event.date, event.time, event.age_limit, event.description, event.num_tickets, event.price FROM arena INNER JOIN event USING(arena_id)");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM view_AllEvents");
 			result = preparedStatement.executeQuery();
 //			result = statement.executeQuery("SELECT * FROM arena INNER JOIN event WHERE arena.arena_id=event.arena_id");
 		} catch (SQLException e) {

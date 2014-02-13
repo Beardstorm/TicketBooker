@@ -58,11 +58,11 @@ public class Event extends JPanel{
 		rightInfoPanel.add(noOfTicketsLabel);
 		rightInfoPanel.add(buyButton);
 		
-		this.setLayout(new GridLayout(2,1,5,5));
+		this.setLayout(new GridLayout(1,2));
 		this.add(leftInfoPanel);
 		this.add(rightInfoPanel);
 		
-		this.setPreferredSize(new Dimension(200,200));
+		this.setPreferredSize(new Dimension(400, 250));
 		this.setBackground(Color.white);
 		this.setBorder(new LineBorder(Color.gray, 1));
 		
