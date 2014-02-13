@@ -81,7 +81,6 @@ public class GUI extends JFrame
 		searchTabPanel = new JPanel();
 		searchTabPanelContentHeader = new JPanel();
 		searchTabPanelContentBody = new JPanel();
-		searchButton = new JButton("Search");
 		registerTabPanel = new JPanel();
 		registerButton = new JButton("Register");
 		addeventTabPanel = new JPanel();
@@ -247,21 +246,22 @@ public class GUI extends JFrame
 
 		descriptionText.setBounds(478, 120, 229, 116);
 
-
-
-		searchButton.setActionCommand("search");
-
 		searchTextField.setText("Search");
 		searchTextField.setColumns(25);
 		searchTextField.addFocusListener(new CustomFocusListener(searchTextField));
 
 		FlowLayout fl_searchTabPanelContentHeader = (FlowLayout) searchTabPanelContentHeader.getLayout();
 		fl_searchTabPanelContentHeader.setAlignment(FlowLayout.LEFT);
-		searchTabPanelContentHeader.add(searchButton);
 		searchTabPanelContentHeader.add(searchTextField);
 
 		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
 		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
+		searchButton = new JButton("Search");
+		
+		
+		
+				searchButton.setActionCommand("search");
+				searchTabPanelContentHeader.add(searchButton);
 //		searchTabPanelContent.add(searchTabPanelContentBody, BorderLayout.CENTER);
 		searchTabPanelContent.setBackground(SystemColor.menu);
 		
