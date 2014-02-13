@@ -110,18 +110,7 @@ public class MainController {
 				
 				int arenaId = Integer.valueOf(gui.getTxtarenaid().getText());
 				String eventname= gui.getTxtEventname().getText();
-				//String date = gui.getTxtDate().getText();
-				
-				SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-mm-dd");
-				java.util.Date evendDate=null;;
-				try {
-					evendDate = formatDate.parse(gui.getTxtDate().getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				java.sql.Date date = new java.sql.Date(evendDate.getTime());
-				
+				String date = gui.getTxtDate().getText();
 				String time = gui.getTxtTime().getText();
 
 				int age =Integer.valueOf(gui.getTxtAgelimit().getText());
