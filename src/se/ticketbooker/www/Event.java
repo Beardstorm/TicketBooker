@@ -16,15 +16,15 @@ import javax.swing.border.LineBorder;
 public class Event extends JPanel{
 	private String arenaName;
 	private String eventName;
-	private Date eventDate;
-	private Time eventTime;
-	private String ageLimit;
+	private String eventDate;
+	private String eventTime;
+	private int ageLimit;
 	private String eventDescription;
 	private int numTickets;
 	private JButton buyButton;
 	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, descriptionLabel, noOfTicketsLabel;
 	
-	public Event(String arenaName, String eventName, Date eventDate, Time eventTime, String ageLimit, String eventDescription, int numTickets) {
+	public Event(String arenaName, String eventName, String eventDate, String eventTime, int ageLimit, String eventDescription, int numTickets, int price) {
 		setArenaName(arenaName);
 		setEventName(eventName);
 		setEventDate(eventDate);
@@ -43,7 +43,7 @@ public class Event extends JPanel{
 		eventNameLabel = new JLabel(getEventName());
 		eventDateLabel = new JLabel(getEventDate().toString());
 		eventTimeLabel = new JLabel(getEventTime().toString());
-		ageLimitLabel = new JLabel(getAgeLimit());
+		ageLimitLabel = new JLabel(Integer.toString(getAgeLimit()));
 		descriptionLabel = new JLabel(getEventDescription());
 		noOfTicketsLabel = new JLabel(Integer.toString(getNumTickets()));
 		buyButton = new JButton("Buy");
@@ -64,7 +64,7 @@ public class Event extends JPanel{
 		
 		this.setPreferredSize(new Dimension(200,200));
 		this.setBackground(Color.white);
-		this.setBorder(new LineBorder(Color.gray, 2));
+		this.setBorder(new LineBorder(Color.gray, 1));
 		
 	}
 
@@ -84,27 +84,27 @@ public class Event extends JPanel{
 		this.eventName = eventName;
 	}
 
-	public Date getEventDate() {
+	public String getEventDate() {
 		return eventDate;
 	}
 
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
 	}
 
-	public Time getEventTime() {
+	public String getEventTime() {
 		return eventTime;
 	}
 
-	public void setEventTime(Time eventTime) {
+	public void setEventTime(String eventTime) {
 		this.eventTime = eventTime;
 	}
 
-	public String getAgeLimit() {
+	public int getAgeLimit() {
 		return ageLimit;
 	}
 
-	public void setAgeLimit(String ageLimit) {
+	public void setAgeLimit(int ageLimit) {
 		this.ageLimit = ageLimit;
 	}
 

@@ -2,27 +2,27 @@ package mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import se.ticketbooker.gui.GUI;
 import se.ticketbooker.www.DBHandler;
+import se.ticketbooker.www.Event;
 import se.ticketbooker.www.User;
 
 public class MainController {
 	private GUI gui;
 	private DBHandler db;
-	
-	// ROW ADDED FOR GITHUB TEST
+	private ArrayList<Event> eventList;
 
 	public MainController(GUI gui, DBHandler db){
 		this.gui = gui;
 		this.db = db;
+		
+		eventList = new ArrayList<Event>();
 		
 		this.gui.addButtonListener(new ButtonListener());
 	}
@@ -37,12 +37,21 @@ public class MainController {
 			switch(action){
 			case "search":
 				db.connect();
-				/*
-				 * 1. retrive a Resultset from DBhandler
-				 * 2. generate an ArrayList of Events
-				 * 3. send to GUI
-				 */
 				
+				ResultSet result = db.getEvents();
+				try {
+					result.beforeFirst();
+					while(result.next()){
+						eventList.add(new Event(result.getString(1), result.getString(2), result.getString(3),
+								result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8)));
+					}
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				gui.addEventsToGui(eventList);
+					
 				db.disconnect();
 				break;
 				

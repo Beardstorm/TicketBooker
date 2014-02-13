@@ -3,7 +3,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,16 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.SystemColor;
-import java.util.ArrayList;
-
-import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import se.ticketbooker.www.Event;
 
@@ -28,12 +26,15 @@ import se.ticketbooker.www.Event;
 public class GUI extends JFrame
 {	
 	private JTabbedPane tabPanel;
-	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel,addeventTabPanel;
+	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel,
+						searchTabPanelContent, registerTabPanel, addeventTabPanel;
+	
 	private JPanel headerLoginPanel;
 	private JPanel headerFillPanel;
 	private JPanel headerLoginPanelName;
 	private JPanel headerLoginPanelContent;
 	private JPanel searchTabPanelContentHeader;
+	private JPanel searchTabPanelContentBody;
 
 	private JTextField searchTextField;
 	private JTextField loginEmailTextField;
@@ -50,7 +51,7 @@ public class GUI extends JFrame
 	private JTextField addEventNumTicketsTextField;
 	private JTextField addEventPriceTextField;
 
-	private JScrollBar searchTabScrollbar;
+	private JScrollPane searchTabScrollPane;
 	private JTextArea descriptionText;
 
 	private JButton loginButton, logoutButton, searchButton, registerButton,addeventButton,clearButton;
@@ -69,6 +70,7 @@ public class GUI extends JFrame
 	private JLabel priceLabel;
 
 	private ArrayList<Event> eventList;
+	
 	public GUI()
 	{
 		contentPane = new JPanel();
@@ -78,7 +80,7 @@ public class GUI extends JFrame
 		tabPanel = new JTabbedPane();
 		searchTabPanel = new JPanel();
 		searchTabPanelContentHeader = new JPanel();
-		searchTabScrollbar = new JScrollBar();
+		searchTabPanelContentBody = new JPanel();
 		searchButton = new JButton("Search");
 		registerTabPanel = new JPanel();
 		registerButton = new JButton("Register");
@@ -132,10 +134,6 @@ public class GUI extends JFrame
 
 	private void createAndShowGUI() 
 	{
-
-
-
-
 
 		usernameHeaderLabel = new JLabel("Logged in as #USERNAME");
 		usernameHeaderLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -262,13 +260,17 @@ public class GUI extends JFrame
 		searchTabPanelContentHeader.add(searchButton);
 		searchTabPanelContentHeader.add(searchTextField);
 
-		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
-		searchTabPanelContent.setBackground(SystemColor.menu);
 		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
-
-		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
-		searchTabPanel.add(searchTabScrollbar, BorderLayout.EAST);
+		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
+//		searchTabPanelContent.add(searchTabPanelContentBody, BorderLayout.CENTER);
+		searchTabPanelContent.setBackground(SystemColor.menu);
+		
+		
 		searchTabPanel.setLayout(new BorderLayout(0, 0));
+		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
+		searchTabScrollPane = new JScrollPane(searchTabPanelContentBody);
+		searchTabPanelContent.add(searchTabScrollPane, BorderLayout.CENTER);
+		
 
 		registerTabPanel.add(lblEmail);
 		registerTabPanel.add(lblName);
@@ -346,14 +348,14 @@ public class GUI extends JFrame
 	}
 
 	
-	/* Kanske något sånt här kanske typ liksom *********/
+
 	
 	//receives an eventList generated in DBHandler from a ResultSet (not written yet)
 	public void addEventsToGui(ArrayList<Event> eventList){
 		//if eventList is not empty, remove components from GUI and clear the list
 		if(!this.eventList.isEmpty()){
 			for(Event e : this.eventList){
-				searchTabPanelContent.remove(e);
+				searchTabPanelContentBody.remove(e);
 			}
 			this.eventList.clear();
 		}
@@ -361,14 +363,16 @@ public class GUI extends JFrame
 		//set eventList to the one received in parameter
 		this.eventList = eventList;
 		
+		searchTabPanelContentBody.setLayout(new GridLayout(eventList.size(), 1));
+		
 		//add new Events to GUI
 		for(Event e : eventList){
-			searchTabPanelContent.add(e);
+			searchTabPanelContentBody.add(e);
 		}
 		
 		//re-validate and repaint
-		searchTabPanelContent.revalidate();
-		searchTabPanelContent.repaint();
+		searchTabPanelContentBody.revalidate();
+		searchTabPanelContentBody.repaint();
 	}
 
 	

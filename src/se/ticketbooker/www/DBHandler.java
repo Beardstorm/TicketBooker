@@ -172,8 +172,8 @@ public class DBHandler{
 	}
 	
 	public ResultSet getEvents(){
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM arena INNER JOIN event USING(arena_id)");
+		try {//arena.name, event.name, event.date, event.time, event.age_limit, event.description, event.tickets
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT arena.name, event.name, event.date, event.time, event.age_limit, event.description, event.num_tickets, event.price FROM arena INNER JOIN event USING(arena_id)");
 			result = preparedStatement.executeQuery();
 //			result = statement.executeQuery("SELECT * FROM arena INNER JOIN event WHERE arena.arena_id=event.arena_id");
 		} catch (SQLException e) {
