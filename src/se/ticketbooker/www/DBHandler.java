@@ -139,7 +139,7 @@ public class DBHandler{
 		//make a ticket
 	}
 	
-	public void createEvent(int arenaId,String eventname,String date,String time,int age,String des,int ntickets,int price){
+	public void createEvent(int arenaId,String eventname,Date date,String time,int age,String des,int ntickets,int price){
 		//create a new event
 		try {
 //			statement.executeUpdate("INSERT INTO event SET arena_id='"+arenaId+"', name = '"+eventname+"',date=STR_TO_DATE('"+date+")',time='"+time+
