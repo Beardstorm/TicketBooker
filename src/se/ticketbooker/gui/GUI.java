@@ -15,43 +15,60 @@ import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.SystemColor;
+import java.util.ArrayList;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+
+import se.ticketbooker.www.Event;
 
 
 public class GUI extends JFrame
 {	
 	private JTabbedPane tabPanel;
 	private JPanel contentPane, headerPanel, buttonPanel, logoPanel, searchTabPanel, searchTabPanelContent, registerTabPanel,addeventTabPanel;
+	private JPanel headerLoginPanel;
+	private JPanel headerFillPanel;
+	private JPanel headerLoginPanelName;
+	private JPanel headerLoginPanelContent;
+	private JPanel searchTabPanelContentHeader;
+
 	private JTextField searchTextField;
 	private JTextField loginEmailTextField;
 	private JTextField loginPasswordTextField;
-	private JButton loginButton, logoutButton, searchButton, registerButton,addeventButton,clearButton;
-	private JLabel iconLabel;
-	private JScrollBar searchTabScrollbar;
-	private JPanel headerLoginPanel;
-	private JPanel headerFillPanel;
-	private JLabel lblEmail, lblPassword, lblName, lblPhone; 
 	private JTextField registerEmailTextField;
 	private JTextField registerPasswordTextField;
 	private JTextField registerNameTextField;
 	private JTextField registerPhonenrTextField;
-	private JPanel searchTabPanelContentHeader;
-	private JLabel registerMessageLabel;
-	private JPanel headerLoginPanelName;
-	private JPanel headerLoginPanelContent;
-	private JLabel usernameHeaderLabel;
-	private JTextField txtarenaid;
-	private JTextField txteventName;
-	private JTextField txtDate;
-	private JTextField txtTime;
-	private JTextField txtAgelimit;
-	private JTextField txtNumTic;
-	private JTextField txtPrice;
-	JTextArea descriptionText;
+	private JTextField addEventArenaidTextField;
+	private JTextField addEventNameTextField;
+	private JTextField addEventDateTextField;
+	private JTextField addEventTimeTextField;
+	private JTextField addEventAgelimitTextField;
+	private JTextField addEventNumTicketsTextField;
+	private JTextField addEventPriceTextField;
 
-	
+	private JScrollBar searchTabScrollbar;
+	private JTextArea descriptionText;
+
+	private JButton loginButton, logoutButton, searchButton, registerButton,addeventButton,clearButton;
+
+	private JLabel iconLabel;
+	private JLabel lblEmail, lblPassword, lblName, lblPhone; 
+	private JLabel registerMessageLabel;
+	private JLabel usernameHeaderLabel;
+	private JLabel eventidLabel;
+	private JLabel eventnameLabel;
+	private JLabel dateLabel;
+	private JLabel timeLabel;
+	private JLabel agelimitLabel;
+	private JLabel desLabel;
+	private JLabel numticketLabel;
+	private JLabel priceLabel;
+
+	private ArrayList<Event> eventList;
 	public GUI()
 	{
 		contentPane = new JPanel();
@@ -61,9 +78,11 @@ public class GUI extends JFrame
 		tabPanel = new JTabbedPane();
 		searchTabPanel = new JPanel();
 		searchTabPanelContentHeader = new JPanel();
+		searchTabScrollbar = new JScrollBar();
 		searchButton = new JButton("Search");
 		registerTabPanel = new JPanel();
 		registerButton = new JButton("Register");
+		addeventTabPanel = new JPanel();
 		lblName = new JLabel("Full Name *");
 		lblEmail = new JLabel("E-mail *");
 		lblPassword = new JLabel("Password *");
@@ -77,222 +96,237 @@ public class GUI extends JFrame
 		addeventButton = new JButton("Add Event");
 		clearButton = new JButton("Clear Text");
 		descriptionText = new JTextArea();
-		
-		createAndShowGUI();
-	}
 
-	private void createAndShowGUI() {
-		
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		headerPanel.setLayout(new BorderLayout(0, 0));
-		contentPane.add(headerPanel, BorderLayout.NORTH);
-		
-		headerPanel.add(logoPanel, BorderLayout.NORTH);
-		logoPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		logoPanel.add(iconLabel);
+		eventidLabel = new JLabel("ArenaID");
+		eventnameLabel = new JLabel("Event Name");
+		dateLabel = new JLabel("Date");
+		timeLabel = new JLabel("Time");
+		agelimitLabel = new JLabel("Age Limit");
+		desLabel = new JLabel("Description");
+		numticketLabel = new JLabel("Number of Tickets");
+		priceLabel = new JLabel("Price");
+
 		headerFillPanel = new JPanel();
 		headerLoginPanel = new JPanel();
 		buttonPanel = new JPanel();
-		
-		headerPanel.add(buttonPanel);
-		buttonPanel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		buttonPanel.add(headerFillPanel);
-		buttonPanel.add(headerLoginPanel);
-		headerLoginPanel.setLayout(new GridLayout(2, 1, 0, 0));
-		
+
+		addEventPriceTextField = new JTextField();
+		addEventNumTicketsTextField = new JTextField();
+		addEventAgelimitTextField = new JTextField();
+		addEventTimeTextField = new JTextField();
+		addEventDateTextField = new JTextField();
+		addEventArenaidTextField = new JTextField();
+		addEventNameTextField = new JTextField();
+		registerMessageLabel = new JLabel("");
+		loginButton = new JButton("Login");
+		loginPasswordTextField = new JPasswordField();
+		loginEmailTextField = new JTextField();
+		headerLoginPanelContent = new JPanel();
+		logoutButton = new JButton("Logout");
 		headerLoginPanelName = new JPanel();
-		headerLoginPanel.add(headerLoginPanelName);
-		
+
+		eventList = new ArrayList<Event>();
+
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() 
+	{
+
+
+
+
+
 		usernameHeaderLabel = new JLabel("Logged in as #USERNAME");
 		usernameHeaderLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		usernameHeaderLabel.setVisible(false);
 		headerLoginPanelName.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		headerLoginPanelName.add(usernameHeaderLabel);
-		
-		
-		headerLoginPanelContent = new JPanel();
-		headerLoginPanel.add(headerLoginPanelContent);
+
+
+
+
 		FlowLayout fl_headerLoginPanelContent = new FlowLayout(FlowLayout.RIGHT, 5, 0);
 		headerLoginPanelContent.setLayout(fl_headerLoginPanelContent);
-		loginEmailTextField = new JTextField();
+
 		headerLoginPanelContent.add(loginEmailTextField);
-		
+
 		loginEmailTextField.setText("Email");
 		loginEmailTextField.setColumns(10);
 		loginEmailTextField.addFocusListener(new CustomFocusListener(loginEmailTextField));
-		loginPasswordTextField = new JPasswordField();
+
 		headerLoginPanelContent.add(loginPasswordTextField);
 		loginPasswordTextField.setText("Password");
 		loginPasswordTextField.setColumns(10);
 		loginPasswordTextField.addFocusListener(new CustomFocusListener(loginPasswordTextField));
-		loginButton = new JButton("Login");
+
 		headerLoginPanelContent.add(loginButton);
 		loginButton.setActionCommand("login");
-		logoutButton = new JButton("Logout");
 		headerLoginPanelContent.add(logoutButton);
 		logoutButton.setActionCommand("logout");
 		logoutButton.setEnabled(false);
-		
-		contentPane.add(tabPanel);
-		
-		searchTabPanel.setLayout(new BorderLayout(0, 0));
-		searchTabScrollbar = new JScrollBar();
-		searchTabPanel.add(searchTabScrollbar, BorderLayout.EAST);
-		
-		tabPanel.addTab("Search", searchTabPanel);
-		tabPanel.addTab("Register", registerTabPanel);
-		registerTabPanel.setLayout(null);
-		
+
+
+
+
+
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmail.setBounds(107, 80, 82, 14);
-		registerTabPanel.add(lblEmail);
-		
+
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblName.setBounds(107, 37, 82, 14);
-		registerTabPanel.add(lblName);
-		
+
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPassword.setBounds(107, 122, 82, 14);
-		registerTabPanel.add(lblPassword);
-		
+
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPhone.setBounds(107, 164, 82, 14);
-		registerTabPanel.add(lblPhone);
-		
+
 		registerNameTextField.setBounds(221, 35, 165, 20);
-		registerTabPanel.add(registerNameTextField);
 		registerNameTextField.setColumns(18);
-		
+
 		registerEmailTextField.setBounds(221, 78, 165, 20);
-		registerTabPanel.add(registerEmailTextField);
 		registerEmailTextField.setColumns(18);
-		
+
 		registerPasswordTextField.setBounds(221, 120, 165, 20);
-		registerTabPanel.add(registerPasswordTextField);
-		
+
 		registerPhonenrTextField.setBounds(221, 158, 165, 20);
-		registerTabPanel.add(registerPhonenrTextField);
 		registerPhonenrTextField.setColumns(18);
-		
+
 		registerButton.setBounds(314, 231, 102, 23);
-		registerTabPanel.add(registerButton);
 		registerButton.setActionCommand("register");
-		
-		registerMessageLabel = new JLabel("");
+
 		registerMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		registerMessageLabel.setBounds(231, 321, 223, 20);
-		registerTabPanel.add(registerMessageLabel);
-		
-		searchTabPanelContent.setBackground(SystemColor.menu);
-		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
-		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
-		
-		FlowLayout fl_searchTabPanelContentHeader = (FlowLayout) searchTabPanelContentHeader.getLayout();
-		fl_searchTabPanelContentHeader.setAlignment(FlowLayout.LEFT);
-		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
-		
-		searchTabPanelContentHeader.add(searchTextField);
+
+
+
+
+
+
+		eventidLabel.setBounds(48, 26, 132, 26);
+		eventnameLabel.setBounds(48, 74, 132, 26);
+		dateLabel.setBounds(48, 120, 132, 26);
+		timeLabel.setBounds(48, 164, 132, 26);
+		agelimitLabel.setBounds(48, 210, 132, 26);
+		desLabel.setBounds(474, 75, 133, 24);
+		numticketLabel.setBounds(48, 247, 132, 26);
+		priceLabel.setBounds(48, 287, 132, 26);
+
+		addEventArenaidTextField.setBounds(232, 29, 184, 20);
+		addEventArenaidTextField.setColumns(10);
+
+		addEventNameTextField.setText("");
+		addEventNameTextField.setBounds(232, 77, 184, 20);
+		addEventNameTextField.setColumns(10);
+
+		addEventDateTextField.setText("");
+		addEventDateTextField.setBounds(232, 123, 184, 20);
+		addEventDateTextField.setColumns(10);
+
+		addEventTimeTextField.setText("");
+		addEventTimeTextField.setBounds(232, 167, 184, 20);
+		addEventTimeTextField.setColumns(10);
+
+		addEventAgelimitTextField.setText("");
+		addEventAgelimitTextField.setBounds(232, 209, 184, 20);
+		addEventAgelimitTextField.setColumns(10);
+
+		addEventNumTicketsTextField.setText("");
+		addEventNumTicketsTextField.setBounds(232, 247, 184, 20);
+		addEventNumTicketsTextField.setColumns(10);
+
+		addEventPriceTextField.setText("");
+		addEventPriceTextField.setBounds(232, 289, 184, 20);
+		addEventPriceTextField.setColumns(10);
+
+
+		addeventButton.setBounds(157, 342, 132, 23);
+		addeventButton.setActionCommand("AddEvent");
+
+		clearButton.setBounds(440, 342, 137, 23);
+		clearButton.setActionCommand("clearText");
+
+		descriptionText.setBounds(478, 120, 229, 116);
+
+
+
+		searchButton.setActionCommand("search");
+
 		searchTextField.setText("Search");
 		searchTextField.setColumns(25);
 		searchTextField.addFocusListener(new CustomFocusListener(searchTextField));
-		
+
+		FlowLayout fl_searchTabPanelContentHeader = (FlowLayout) searchTabPanelContentHeader.getLayout();
+		fl_searchTabPanelContentHeader.setAlignment(FlowLayout.LEFT);
 		searchTabPanelContentHeader.add(searchButton);
-		searchButton.setActionCommand("search");
-		addeventTabPanel = new JPanel();
-		addeventTabPanel.setLayout(null);
-		
-		JLabel eventidLabel = new JLabel("ArenaID");
-		eventidLabel.setBounds(48, 26, 132, 26);
+		searchTabPanelContentHeader.add(searchTextField);
+
+		searchTabPanelContent.add(searchTabPanelContentHeader, BorderLayout.NORTH);
+		searchTabPanelContent.setBackground(SystemColor.menu);
+		searchTabPanelContent.setLayout(new BorderLayout(0, 0));
+
+		searchTabPanel.add(searchTabPanelContent, BorderLayout.CENTER);
+		searchTabPanel.add(searchTabScrollbar, BorderLayout.EAST);
+		searchTabPanel.setLayout(new BorderLayout(0, 0));
+
+		registerTabPanel.add(lblEmail);
+		registerTabPanel.add(lblName);
+		registerTabPanel.add(lblPassword);
+		registerTabPanel.add(lblPhone);
+		registerTabPanel.add(registerNameTextField);
+		registerTabPanel.add(registerEmailTextField);
+		registerTabPanel.add(registerPasswordTextField);
+		registerTabPanel.add(registerButton);
+		registerTabPanel.add(registerMessageLabel);
+		registerTabPanel.add(registerPhonenrTextField);
+		registerTabPanel.setLayout(null);
+
 		addeventTabPanel.add(eventidLabel);
-		
-		JLabel eventnameLabel = new JLabel("Event Name");
-		eventnameLabel.setBounds(48, 74, 132, 26);
 		addeventTabPanel.add(eventnameLabel);
-		
-		JLabel dateLabel = new JLabel("Date");
-		dateLabel.setBounds(48, 120, 132, 26);
 		addeventTabPanel.add(dateLabel);
-		
-		JLabel timeLabel = new JLabel("Time");
-		timeLabel.setBounds(48, 164, 132, 26);
 		addeventTabPanel.add(timeLabel);
-		
-		JLabel agelimitLabel = new JLabel("Age Limit");
-		agelimitLabel.setBounds(48, 210, 132, 26);
 		addeventTabPanel.add(agelimitLabel);
-		
-		JLabel desLabel = new JLabel("Description");
-		desLabel.setBounds(474, 75, 133, 24);
 		addeventTabPanel.add(desLabel);
-		
-		JLabel numticketLabel = new JLabel("Number of Tickets");
-		numticketLabel.setBounds(48, 247, 132, 26);
 		addeventTabPanel.add(numticketLabel);
-		
-		JLabel priceLabel = new JLabel("Price");
-		priceLabel.setBounds(48, 287, 132, 26);
 		addeventTabPanel.add(priceLabel);
-		tabPanel.addTab("Add Event",addeventTabPanel);
-		
-		txtarenaid = new JTextField();
-		txtarenaid.setBounds(232, 29, 184, 20);
-		addeventTabPanel.add(txtarenaid);
-		txtarenaid.setColumns(10);
-		
-		txteventName = new JTextField();
-		txteventName.setText("");
-		txteventName.setBounds(232, 77, 184, 20);
-		addeventTabPanel.add(txteventName);
-		txteventName.setColumns(10);
-		
-		txtDate = new JTextField();
-		txtDate.setText("");
-		txtDate.setBounds(232, 123, 184, 20);
-		addeventTabPanel.add(txtDate);
-		txtDate.setColumns(10);
-		
-		txtTime = new JTextField();
-		txtTime.setText("");
-		txtTime.setBounds(232, 167, 184, 20);
-		addeventTabPanel.add(txtTime);
-		txtTime.setColumns(10);
-		
-		txtAgelimit = new JTextField();
-		txtAgelimit.setText("");
-		txtAgelimit.setBounds(232, 209, 184, 20);
-		addeventTabPanel.add(txtAgelimit);
-		txtAgelimit.setColumns(10);
-		
-		txtNumTic = new JTextField();
-		txtNumTic.setText("");
-		txtNumTic.setBounds(232, 247, 184, 20);
-		addeventTabPanel.add(txtNumTic);
-		txtNumTic.setColumns(10);
-		
-		txtPrice = new JTextField();
-		txtPrice.setText("");
-		txtPrice.setBounds(232, 289, 184, 20);
-		addeventTabPanel.add(txtPrice);
-		txtPrice.setColumns(10);
-		
-		
-		addeventButton.setBounds(157, 342, 132, 23);
+		addeventTabPanel.add(addEventArenaidTextField);
+		addeventTabPanel.add(addEventNameTextField);
+		addeventTabPanel.add(addEventDateTextField);
+		addeventTabPanel.add(addEventTimeTextField);
+		addeventTabPanel.add(addEventAgelimitTextField);
+		addeventTabPanel.add(addEventNumTicketsTextField);
+		addeventTabPanel.add(addEventPriceTextField);
 		addeventTabPanel.add(addeventButton);
-		addeventButton.setActionCommand("AddEvent");
-		
-		
-		clearButton.setBounds(440, 342, 137, 23);
 		addeventTabPanel.add(clearButton);
-		clearButton.setActionCommand("clearText");
-		
-		
-		descriptionText.setBounds(478, 120, 229, 116);
 		addeventTabPanel.add(descriptionText);
-		
+		addeventTabPanel.setLayout(null);
+
+		tabPanel.addTab("Search", searchTabPanel);
+		tabPanel.addTab("Register", registerTabPanel);
+		tabPanel.addTab("Add Event", addeventTabPanel);
+
+		logoPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		logoPanel.add(iconLabel);
+
+		headerLoginPanel.add(headerLoginPanelName);
+		headerLoginPanel.add(headerLoginPanelContent);
+		headerLoginPanel.setLayout(new GridLayout(2, 1, 0, 0));
+
+		buttonPanel.add(headerFillPanel);
+		buttonPanel.add(headerLoginPanel);
+		buttonPanel.setLayout(new GridLayout(0, 2, 0, 0));
+
+		headerPanel.setLayout(new BorderLayout(0, 0));
+		headerPanel.add(logoPanel, BorderLayout.NORTH);
+		headerPanel.add(buttonPanel);
+
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.add(headerPanel, BorderLayout.NORTH);
+		contentPane.add(tabPanel);
+
+		setContentPane(contentPane);
 		setAutoRequestFocus(false);
 		setTitle("Ticketmaster");
 		setResizable(false);
@@ -310,15 +344,43 @@ public class GUI extends JFrame
 		addeventButton.addActionListener(listener);
 		clearButton.addActionListener(listener);
 	}
+
 	
+	/* Kanske något sånt här kanske typ liksom *********/
+	
+	//receives an eventList generated in DBHandler from a ResultSet (not written yet)
+	public void addEventsToGui(ArrayList<Event> eventList){
+		//if eventList is not empty, remove components from GUI and clear the list
+		if(!this.eventList.isEmpty()){
+			for(Event e : this.eventList){
+				searchTabPanelContent.remove(e);
+			}
+			this.eventList.clear();
+		}
+		
+		//set eventList to the one received in parameter
+		this.eventList = eventList;
+		
+		//add new Events to GUI
+		for(Event e : eventList){
+			searchTabPanelContent.add(e);
+		}
+		
+		//re-validate and repaint
+		searchTabPanelContent.revalidate();
+		searchTabPanelContent.repaint();
+	}
+
+	
+	//--Getters and Setters --//
 	public JTextField getPasswordField(){
 		return loginPasswordTextField;
 	}
-	
+
 	public JTextField getUsernameField(){
 		return loginEmailTextField;
 	}
-	
+
 	public JTextField getRegisterNameTextField(){
 		return registerNameTextField;
 	}
@@ -326,75 +388,75 @@ public class GUI extends JFrame
 	public JTextField getRegisterEmailTextField(){
 		return registerEmailTextField;
 	}
-	
+
 	public JTextField getRegisterPasswordTextField(){
 		return registerPasswordTextField;
 	}
-	
+
 	public JTextField getRegisterPhonenrTextField(){
 		return registerPhonenrTextField;
 	}
-	
+
 	public JPanel getHeaderLoginPanel()
 	{
 		return headerLoginPanel;
 	}
-	
+
 	public JLabel getUsernameHeaderLabel()
 	{
 		return usernameHeaderLabel;
 	}
-	
+
 	public JLabel getRegisterMessage()
 	{
 		return registerMessageLabel;
-		
+
 	}
 	public JButton getRegisterButton(){
 		return registerButton;
-		
+
 	}
-	
+
 	public JButton getLogoutButton(){
 		return logoutButton;
-		
+
 	}
 	public JButton getLoginButton(){
 		return loginButton;
-		
+
 	}
-	
+
 	public JTextField getTxtarenaid(){
-		return txtarenaid;
-		
+		return addEventArenaidTextField;
+
 	}
 	public JTextField getTxtEventname(){
-		return txteventName;
-		
+		return addEventNameTextField;
+
 	}
 	public JTextField getTxtDate(){
-		return txtDate;
-		
+		return addEventDateTextField;
+
 	}
 	public JTextField getTxtTime(){
-		return txtTime;
-		
+		return addEventTimeTextField;
+
 	}
 	public JTextField getTxtAgelimit(){
-		return txtAgelimit;
-		
+		return addEventAgelimitTextField;
+
 	}
 	public JTextArea getTxtDes(){
 		return descriptionText;
-		
+
 	}
 	public JTextField getTxtNumtics(){
-		return txtNumTic;
-		
+		return addEventNumTicketsTextField;
+
 	}
 	public JTextField getTxtPrice(){
-		return txtPrice;
-		
+		return addEventPriceTextField;
+
 	}
-	
+
 }

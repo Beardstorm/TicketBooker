@@ -36,9 +36,12 @@ public class MainController {
 			
 			switch(action){
 			case "search":
-				System.out.println("search");
-
-				//do stuff
+				db.connect();
+				/*
+				 * 1. retrive a Resultset from DBhandler
+				 * 2. generate an ArrayList of Events
+				 * 3. send to GUI
+				 */
 				
 				db.disconnect();
 				break;
@@ -96,9 +99,10 @@ public class MainController {
 							gui.getRegisterEmailTextField().getText(), gui.getRegisterPhonenrTextField().getText());
 				
 				gui.getRegisterButton().setEnabled(false);
-				gui.getRegisterMessage().setText("Registration is successful");
+				
 				try {
 					db.login(gui.getRegisterEmailTextField().getText(), gui.getRegisterPasswordTextField().getText());
+					gui.getRegisterMessage().setText("Registration is successful \n You're logged in");
 				} catch (Exception e1) {
 					System.err.println("Failed to login in register method" + e1.getMessage());
 				}
