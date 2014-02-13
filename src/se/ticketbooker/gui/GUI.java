@@ -354,10 +354,7 @@ public class GUI extends JFrame
 	public void addEventsToGui(ArrayList<Event> eventList){
 		//if eventList is not empty, remove components from GUI and clear the list
 		if(!this.eventList.isEmpty()){
-			for(Event e : this.eventList){
-				searchTabPanelContentBody.remove(e);
-			}
-			this.eventList.clear();
+				searchTabPanelContentBody.removeAll();
 		}
 		
 		//set eventList to the one received in parameter
