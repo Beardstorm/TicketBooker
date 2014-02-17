@@ -52,6 +52,7 @@ public class Event extends JPanel{
 		noOfTicketsLabel = new JLabel(Integer.toString(getNumTickets()));
 		try {
 			icon = new ImageIcon(image.getBytes(1L, (int) image.length()));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class Event extends JPanel{
 		this.add(leftInfoPanel);
 		this.add(rightInfoPanel);
 		
-		this.setPreferredSize(new Dimension(400, 250));
+		this.setPreferredSize(new Dimension(450, 350));
 		this.setBackground(Color.white);
 		this.setBorder(new LineBorder(Color.gray, 1));
 		
