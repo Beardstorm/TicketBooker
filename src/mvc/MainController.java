@@ -156,6 +156,19 @@ public class MainController {
 			db.createEvent(arenaId, eventname, date, time, age, des, ntickets, price);
 			db.disconnect();
 			break;
+		
+		case "clearText":
+			gui.getTxtarenaid().setText("");
+			gui.getTxtEventname().setText("");
+			gui.getTxtDate().setText("");
+			gui.getTxtTime().setText("");
+
+			gui.getTxtAgelimit().setText("");
+			gui.getTxtDes().setText("");
+			gui.getTxtNumtics().setText("");
+			gui.getTxtPrice().setText("");
+
+			break;
 
 		default:
 			System.out.println("default case");
