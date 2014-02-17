@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,9 +25,10 @@ public class Event extends JPanel{
 	private String eventDescription;
 	private int numTickets;
 	private JButton buyButton;
-	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, descriptionLabel, noOfTicketsLabel;
+	private ImageIcon icon ;
+	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, descriptionLabel, noOfTicketsLabel,imageLabel;
 	
-	public Event(String arenaName, String eventName, String eventDate, String eventTime, int ageLimit, String eventDescription, int numTickets, int price) {
+	public Event(String arenaName, String eventName, String eventDate, String eventTime, int ageLimit, String eventDescription, int numTickets, int price,Blob image) {
 		setArenaName(arenaName);
 		setEventName(eventName);
 		setEventDate(eventDate);
@@ -46,6 +50,13 @@ public class Event extends JPanel{
 		ageLimitLabel = new JLabel(Integer.toString(getAgeLimit()));
 		descriptionLabel = new JLabel(getEventDescription());
 		noOfTicketsLabel = new JLabel(Integer.toString(getNumTickets()));
+		try {
+			icon = new ImageIcon(image.getBytes(1L, (int) image.length()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		imageLabel = new JLabel(icon);
 		buyButton = new JButton("Buy");
 		
 		leftInfoPanel.add(arenaLabel);
@@ -54,6 +65,7 @@ public class Event extends JPanel{
 		leftInfoPanel.add(eventTimeLabel);
 		leftInfoPanel.add(ageLimitLabel);
 		
+		rightInfoPanel.add(imageLabel);
 		rightInfoPanel.add(descriptionLabel);
 		rightInfoPanel.add(noOfTicketsLabel);
 		rightInfoPanel.add(buyButton);

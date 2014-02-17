@@ -49,7 +49,7 @@ public class MainController {
 						result.beforeFirst();
 						while(result.next()){
 							eventList.add(new Event(result.getString(1), result.getString(2), result.getString(3),
-									result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8)));
+									result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8),result.getBlob(9)));
 						}
 					} catch (SQLException e2) {
 						// TODO Auto-generated catch block
@@ -65,7 +65,7 @@ public class MainController {
 					result.beforeFirst();
 					while(result.next()){
 						eventList.add(new Event(result.getString(1), result.getString(2), result.getString(3),
-								result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8)));
+								result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8),result.getBlob(9)));
 					}
 				} catch (SQLException e2) {
 					System.err.println("Error: Could not retrieve events " + e2.getMessage());
