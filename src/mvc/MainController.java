@@ -52,8 +52,7 @@ public class MainController {
 									result.getString(4), result.getInt(5), result.getString(6), result.getInt(7), result.getInt(8), result.getBlob(9)));
 						}
 					} catch (SQLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
+						System.err.println("Error: Could not create eventlist " + e2.getMessage());
 					}
 
 					gui.addEventsToGui(eventList);

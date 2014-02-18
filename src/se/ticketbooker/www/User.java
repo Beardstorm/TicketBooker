@@ -10,7 +10,6 @@ public class User {
 	private String password;
 	
 	public User(){
-		System.out.println("user instance created");
 		role = "guest";
 	}
 	
