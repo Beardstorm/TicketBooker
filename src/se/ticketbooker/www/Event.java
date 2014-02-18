@@ -45,7 +45,7 @@ public class Event extends JPanel{
 		JPanel leftInfoPanel = new JPanel();
 		JPanel rightInfoPanel = new JPanel();
 		
-		leftInfoPanel.setLayout(new GridLayout(6,1,0,0));
+		leftInfoPanel.setLayout(new GridLayout(5,1,0,0));
 
 		eventNameLabel = new JLabel(getEventName());
 		arenaLabel = new JLabel("Vart: "+getArenaName());
@@ -61,7 +61,7 @@ public class Event extends JPanel{
 			e.printStackTrace();
 		}
 		imageLabel = new JLabel(icon);
-		leftInfoPanel.add(imageLabel);
+//		rightInfoPanel.add(imageLabel);
 
 		leftInfoPanel.add(eventNameLabel);
 		leftInfoPanel.add(arenaLabel);
@@ -74,7 +74,8 @@ public class Event extends JPanel{
 		eventDescriptionText.setWrapStyleWord(true);
 		eventDescriptionText.setEditable(false);
 		eventDescriptionText.setBackground(new Color(240, 240,240));
-		eventDescriptionText.setFont(new Font(eventDescriptionText.getFont().getName(), eventDescriptionText.getFont().getStyle(), eventDescriptionText.getFont().getSize()+10));
+		eventDescriptionText.setFont(new Font(eventDescriptionText.getFont().getName(), eventDescriptionText.getFont().getStyle(), eventDescriptionText.getFont().getSize()+5));
+		rightInfoPanel.add(imageLabel, BorderLayout.NORTH);
 		rightInfoPanel.add(eventDescriptionText, BorderLayout.CENTER);
 		
 		panel = new JPanel();
