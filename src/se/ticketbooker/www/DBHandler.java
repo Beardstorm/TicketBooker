@@ -159,8 +159,7 @@ public class DBHandler{
 
 	public ResultSet search(String input){
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT * FROM view_AllEvents "
-					+ "WHERE event_name LIKE ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT * FROM view_AllEvents WHERE event_name LIKE ?");
 			preparedStatement.setString(1, "%" + input + "%");
 			result = preparedStatement.executeQuery();
 

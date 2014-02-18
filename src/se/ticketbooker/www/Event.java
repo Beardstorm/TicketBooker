@@ -3,6 +3,7 @@ package se.ticketbooker.www;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.Blob;
 import java.sql.Date;
@@ -13,7 +14,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class Event extends JPanel{
@@ -26,9 +29,11 @@ public class Event extends JPanel{
 	private int numTickets;
 	private JButton buyButton;
 	private ImageIcon icon ;
-	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, descriptionLabel, noOfTicketsLabel,imageLabel;
+	private JLabel arenaLabel, eventNameLabel, eventDateLabel, eventTimeLabel, ageLimitLabel, noOfTicketsLabel,imageLabel;
+	private JTextArea eventDescriptionText; 
+	private JPanel panel;
 	
-	public Event(String arenaName, String eventName, String eventDate, String eventTime, int ageLimit, String eventDescription, int numTickets, int price,Blob image) {
+	public Event(String arenaName, String eventName, String eventDate, String eventTime, int ageLimit, String eventDescription, int numTickets, int price, Blob image) {
 		setArenaName(arenaName);
 		setEventName(eventName);
 		setEventDate(eventDate);
@@ -40,43 +45,50 @@ public class Event extends JPanel{
 		JPanel leftInfoPanel = new JPanel();
 		JPanel rightInfoPanel = new JPanel();
 		
-		leftInfoPanel.setLayout(new GridLayout(5,1,5,5));
-		rightInfoPanel.setLayout(new FlowLayout());
-		
-		arenaLabel = new JLabel(getArenaName());
+		leftInfoPanel.setLayout(new GridLayout(6,1,0,0));
+
 		eventNameLabel = new JLabel(getEventName());
-		eventDateLabel = new JLabel(getEventDate().toString());
-		eventTimeLabel = new JLabel(getEventTime().toString());
-		ageLimitLabel = new JLabel(Integer.toString(getAgeLimit()));
-		descriptionLabel = new JLabel(getEventDescription());
-		noOfTicketsLabel = new JLabel(Integer.toString(getNumTickets()));
+		arenaLabel = new JLabel("Vart: "+getArenaName());
+		eventDateLabel = new JLabel("Datum: "+getEventDate().toString());
+		eventTimeLabel = new JLabel("Tid: "+getEventTime().toString());
+		ageLimitLabel = new JLabel("Åldersgräns: "+Integer.toString(getAgeLimit()));
 		try {
-			icon = new ImageIcon(image.getBytes(1L, (int) image.length()));
+			if(image != null)
+				icon = new ImageIcon(image.getBytes(1L, (int) image.length()));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		imageLabel = new JLabel(icon);
-		buyButton = new JButton("Buy");
-		
-		leftInfoPanel.add(arenaLabel);
+		leftInfoPanel.add(imageLabel);
+
 		leftInfoPanel.add(eventNameLabel);
+		leftInfoPanel.add(arenaLabel);
 		leftInfoPanel.add(eventDateLabel);
 		leftInfoPanel.add(eventTimeLabel);
 		leftInfoPanel.add(ageLimitLabel);
+		rightInfoPanel.setLayout(new BorderLayout(0, 0));
+		eventDescriptionText = new JTextArea(getEventDescription());
+		eventDescriptionText.setLineWrap(true);
+		eventDescriptionText.setWrapStyleWord(true);
+		eventDescriptionText.setEditable(false);
+		eventDescriptionText.setBackground(new Color(240, 240,240));
+		eventDescriptionText.setFont(new Font(eventDescriptionText.getFont().getName(), eventDescriptionText.getFont().getStyle(), eventDescriptionText.getFont().getSize()+10));
+		rightInfoPanel.add(eventDescriptionText, BorderLayout.CENTER);
 		
-		rightInfoPanel.add(imageLabel);
-		rightInfoPanel.add(descriptionLabel);
-		rightInfoPanel.add(noOfTicketsLabel);
-		rightInfoPanel.add(buyButton);
+		panel = new JPanel();
+		rightInfoPanel.add(panel, BorderLayout.SOUTH);
+		noOfTicketsLabel = new JLabel("Antal platser: "+Integer.toString(getNumTickets()));
+		panel.add(noOfTicketsLabel);
+		buyButton = new JButton("Buy");
+		panel.add(buyButton);
 		
 		this.setLayout(new GridLayout(1,2));
 		this.add(leftInfoPanel);
 		this.add(rightInfoPanel);
 		
 		this.setPreferredSize(new Dimension(450, 350));
-		this.setBackground(Color.white);
 		this.setBorder(new LineBorder(Color.gray, 1));
 		
 	}
